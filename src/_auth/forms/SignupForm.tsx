@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SignupSchema, signupSchema } from '../../lib/validation';
+import Loader from '../../components/shared/Loader';
 
 export default function SignupForm() {
   const {
@@ -69,9 +70,10 @@ export default function SignupForm() {
           </div>
           <button
             type="submit"
-            className="w-full mt-4 px-4 py-2 bg-sky-300 outline-4 outline-sky-500 rounded-md"
+            className="w-full flex justify-center gap-2 mt-4 px-4 py-2 bg-sky-300 outline-4 outline-sky-500 rounded-md"
             disabled={isSubmitting}>
-            {isSubmitting ? 'Loading..' : 'Sign Up'}
+            {isSubmitting && <Loader />}
+            <span>Sign Up</span>
           </button>
         </form>
         <div className="grid justify-center mt-4">
