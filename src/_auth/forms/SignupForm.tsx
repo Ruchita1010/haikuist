@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { supabase } from '../../lib/supabase/supabaseClient';
 import { SignupSchema, signupSchema } from '../../lib/validation';
 import Loader from '../../components/shared/Loader';
 
@@ -13,12 +14,28 @@ export default function SignupForm() {
   } = useForm<SignupSchema>({
     resolver: zodResolver(signupSchema),
   });
+  const navigate = useNavigate();
 
-  const onSubmit = async (data: SignupSchema) => {
-    // code to add it to the database
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(data);
-    reset();
+  const onSubmit = async (user: SignupSchema) => {
+    const { error, data } = await supabase.auth.signUp({
+      email: user.email,
+      password: user.password,
+      options: {
+        data: {
+          username: user.username,
+        },
+      },
+    });
+
+    if (error) {
+      // set toast alert
+      alert(error.message);
+      return;
+    }
+    if (data) {
+      navigate('/home');
+      reset();
+    }
   };
 
   return (
@@ -79,7 +96,7 @@ export default function SignupForm() {
         <div className="grid justify-center mt-4">
           <p className="text-sm">
             Already have an account?
-            <Link to="/sign-in" className="ml-1 text-sky-300 font-semibold">
+            <Link to="/signin" className="ml-1 text-sky-300 font-semibold">
               Sign in
             </Link>
           </p>

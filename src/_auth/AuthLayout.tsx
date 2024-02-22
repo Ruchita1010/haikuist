@@ -1,12 +1,11 @@
 import { Navigate, Outlet } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function AuthLayout() {
-  const isAuthenticated = false;
+  const { session } = useAuth();
   return (
     <>
-      {isAuthenticated ? (
-        <Navigate to="/" />
-      ) : (
+      {session === null ? (
         <div className="flex">
           <img
             src="/assets/images/side-img.jpg"
@@ -18,6 +17,8 @@ export default function AuthLayout() {
             <Outlet />
           </section>
         </div>
+      ) : (
+        <Navigate to="/home" />
       )}
     </>
   );
