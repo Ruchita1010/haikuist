@@ -33,7 +33,7 @@ export default function SignupForm() {
       return;
     }
     if (data) {
-      navigate('/home');
+      navigate('/home', { replace: true });
       reset();
     }
   };

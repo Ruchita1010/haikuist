@@ -18,7 +18,7 @@ export default function AuthLayout() {
           </section>
         </div>
       ) : (
-        <Navigate to="/home" />
+        <Navigate to="/home" replace />
       )}
     </>
   );

@@ -28,7 +28,7 @@ export default function SigninForm() {
       return;
     }
     if (data) {
-      navigate('/home');
+      navigate('/home', { replace: true });
       reset();
     }
   };

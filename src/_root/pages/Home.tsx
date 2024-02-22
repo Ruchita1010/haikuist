@@ -10,7 +10,7 @@ export default function Home() {
       alert(error.message);
       return;
     }
-    navigate('/signin');
+    navigate('/signin', { replace: true });
   };
 
   return (
