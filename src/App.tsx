@@ -8,7 +8,7 @@ import './globals.css';
 
 function App() {
   return (
-    <main className="min-h-screen bg-zinc-50 text-zinc-950">
+    <div className="min-h-screen bg-zinc-50 text-zinc-950">
       <Routes>
         {/* public routes */}
         <Route element={<AuthLayout />}>
@@ -22,7 +22,7 @@ function App() {
           <Route path="/home" element={<Home />} />
         </Route>
       </Routes>
-    </main>
+    </div>
   );
 }
 
