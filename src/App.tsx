@@ -3,7 +3,7 @@ import AuthLayout from './_auth/AuthLayout';
 import SigninForm from './_auth/forms/SigninForm';
 import SignupForm from './_auth/forms/SignupForm';
 import RootLayout from './_root/RootLayout';
-import { Home } from './_root/pages';
+import { Create, Home } from './_root/pages';
 import './globals.css';
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
         {/* private routes */}
         <Route element={<RootLayout />}>
           <Route path="/home" element={<Home />} />
+          <Route path="/create" element={<Create />} />
         </Route>
       </Routes>
     </div>

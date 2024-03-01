@@ -17,3 +17,25 @@ export const signinSchema = z.object({
 });
 
 export type SigninSchema = z.infer<typeof signinSchema>;
+
+const isValidLineCount = (value: string) => {
+  const lines = value.split('\n');
+  return lines.length > 0 && lines.length < 5;
+};
+
+const isValidSyllableCount = (value: string) => {
+  const syllableCount = Math.floor(Math.random() * 20 + 3);
+  console.log(`todo: count syllables of ${value}`);
+  return syllableCount > 3 && syllableCount < 18;
+};
+
+export const haikuSchema = z.object({
+  haiku: z
+    .string()
+    .trim()
+    .max(170, 'Must not exceed 170 characters')
+    .refine(isValidSyllableCount, 'Must be between 3 to 17 syllables')
+    .refine(isValidLineCount, 'Must be between 1 to 4 lines'),
+});
+
+export type HaikuSchema = z.infer<typeof haikuSchema>;

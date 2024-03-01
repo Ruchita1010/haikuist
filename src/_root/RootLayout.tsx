@@ -17,9 +17,11 @@ export default function RootLayout() {
         </div>
         <Navbar />
       </header>
-      <main>
-        <Outlet />
-        <div>Today's Pick</div>
+      <main className="w-full flex">
+        <div className="w-full sm:max-lg:w-7/12 lg:w-4/6 sm:border-r-2">
+          <Outlet />
+        </div>
+        <div className="hidden sm:block">Today's Pick</div>
       </main>
     </div>
   );
