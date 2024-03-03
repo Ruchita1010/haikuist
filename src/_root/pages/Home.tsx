@@ -1,24 +1,38 @@
-import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../lib/supabase/supabaseClient';
+import { useEffect, useState } from 'react';
+import { haikuPostsQuery } from '../../lib/supabase/api';
+import { HaikuPostType } from '../../types';
+import HaikuPost from '../../components/shared/HaikuPost';
 
 export default function Home() {
-  const navigate = useNavigate();
+  const [haikuPosts, setHaikuPosts] = useState([] as Required<HaikuPostType>[]);
 
-  const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      alert(error.message);
-      return;
-    }
-    navigate('/signin', { replace: true });
-  };
+  useEffect(() => {
+    const getHaikuPosts = async () => {
+      const { data, error } = await haikuPostsQuery;
+
+      if (error) {
+        // set error and display error screen
+        alert(error.message);
+        return;
+      }
+      setHaikuPosts(data);
+    };
+
+    getHaikuPosts();
+  }, []);
 
   return (
-    <div>
-      <p>HOME</p>
-      <button onClick={signOut} className="bg-zinc-600 text-zinc-50">
-        Log out
-      </button>
+    <div className="flex flex-col p-6 gap-4 min-h-screen">
+      {haikuPosts.map(({ id, content, created_at, profiles }) => {
+        return (
+          <HaikuPost
+            key={id}
+            content={content}
+            created_at={created_at}
+            profiles={profiles}
+          />
+        );
+      })}
     </div>
   );
 }

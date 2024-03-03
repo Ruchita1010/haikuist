@@ -17,7 +17,7 @@ export default function RootLayout() {
         </div>
         <Navbar />
       </header>
-      <main className="w-full flex">
+      <main className="w-full h-screen flex overflow-y-auto">
         <div className="w-full sm:max-lg:w-7/12 lg:w-4/6 sm:border-r-2">
           <Outlet />
         </div>
