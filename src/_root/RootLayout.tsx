@@ -18,7 +18,7 @@ export default function RootLayout() {
         <Navbar />
       </header>
       <main className="w-full h-screen flex overflow-y-auto">
-        <div className="w-full sm:max-lg:w-7/12 lg:w-4/6 sm:border-r-2">
+        <div className="w-full p-6 sm:max-lg:w-7/12 lg:w-4/6 sm:border-r-2">
           <Outlet />
         </div>
         <div className="hidden sm:block">Today's Pick</div>

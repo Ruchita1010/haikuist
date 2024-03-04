@@ -34,7 +34,7 @@ export default function Create() {
   };
 
   return (
-    <div className="min-h-screen px-6 py-8 bg-sky-100">
+    <div className="min-h-screen py-8">
       <div className="grid gap-6 my-6">
         <h1 className="text-2xl justify-self-center">Create a haiku</h1>
         <p>What's your verse?</p>
@@ -46,7 +46,7 @@ export default function Create() {
             rows={4}
             aria-label="write your haiku"
             placeholder="old pond&#10;frog leaps in&#10;water's sound"
-            className="resize-none w-full p-4 mb-10 text-border border-zinc-300 outline-1 outline-zinc-400 rounded-md"
+            className="resize-none w-full p-4 mb-10 border border-zinc-400 outline-1 outline-zinc-500 rounded-md"
             {...register('haiku')}></textarea>
           {errors.haiku && (
             <p className="text-sm text-red-700">{`${errors.haiku.message}`}</p>

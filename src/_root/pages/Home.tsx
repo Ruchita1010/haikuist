@@ -22,7 +22,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col p-6 gap-4 min-h-screen">
+    <div className="flex flex-col gap-4 min-h-screen">
       {haikuPosts.map(({ id, content, created_at, profiles }) => {
         return (
           <HaikuPost
