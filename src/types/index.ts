@@ -1,3 +1,9 @@
+export type UserProfile = {
+  username: string;
+  bio: string;
+  avatar_url?: string;
+};
+
 export type HaikuPostType = {
   id?: string;
   content: string;

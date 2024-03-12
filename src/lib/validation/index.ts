@@ -39,3 +39,39 @@ export const haikuSchema = z.object({
 });
 
 export type HaikuSchema = z.infer<typeof haikuSchema>;
+
+const MAX_FILE_SIZE = 5000000;
+const ACCEPTED_IMAGE_TYPES = [
+  'image/jpeg',
+  'image/jpg',
+  'image/png',
+  'image/webp',
+];
+
+const isValidFileSize = (files: FileList) => {
+  if (files.length === 0) return true;
+  return files?.[0]?.size <= MAX_FILE_SIZE;
+};
+
+const isValidFileType = (files: FileList) => {
+  if (files.length === 0) return true;
+  return ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type);
+};
+
+export const profileSchema = z.object({
+  /* "resetField" sets "avatar" to undefined. Without this, if no file is submitted,
+     it results in a FileList object with length: 0. Adding optional() for consistency,
+     so that the type ProfileSchema gets inferred as "FileList | undefined". */
+  avatar: z
+    .instanceof(FileList)
+    .refine(isValidFileSize, `Must be 5MB or less`)
+    .refine(isValidFileType, 'Must be in .jpg, .jpeg, .png, .webp format')
+    .optional(),
+  username: z
+    .string()
+    .min(3, { message: 'Must be atleast 3 characters' })
+    .max(30, { message: 'Must be atmost 30 characters' }),
+  bio: z.string().max(150, { message: 'Must be atmost 150 characters' }),
+});
+
+export type ProfileSchema = z.infer<typeof profileSchema>;

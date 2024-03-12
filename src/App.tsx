@@ -3,7 +3,7 @@ import AuthLayout from './_auth/AuthLayout';
 import SigninForm from './_auth/forms/SigninForm';
 import SignupForm from './_auth/forms/SignupForm';
 import RootLayout from './_root/RootLayout';
-import { Create, Home, Profile } from './_root/pages';
+import { Create, EditProfile, Home, Profile } from './_root/pages';
 import './globals.css';
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/create" element={<Create />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
         </Route>
       </Routes>
     </div>
