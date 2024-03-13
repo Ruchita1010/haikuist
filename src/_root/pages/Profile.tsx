@@ -11,14 +11,13 @@ export default function Profile() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const userId = session?.user.id;
-    if (!userId) {
+    if (!session) {
       alert('Please log in!');
       return;
     }
 
     const getProfile = async () => {
-      const { data, error } = await getUserById(userId);
+      const { data, error } = await getUserById(session?.user.id);
       if (error) {
         alert(error.message);
         return;

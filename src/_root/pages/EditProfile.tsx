@@ -38,13 +38,12 @@ export default function EditProfile() {
   useEffect(() => {
     // Fetches and populates user profile data into input fields
     const fetchUserProfile = async () => {
-      const userId = session?.user.id;
-      if (!userId) {
+      if (!session) {
         alert('Please log in to update your profile');
         return;
       }
 
-      const { data, error } = await getUserById(userId);
+      const { data, error } = await getUserById(session.user.id);
       if (error) {
         alert(error.message);
         return;
