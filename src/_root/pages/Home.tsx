@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { haikuPostsQuery } from '../../lib/supabase/api';
+import { getHaikuPosts } from '../../lib/supabase/api';
 import { HaikuPostType } from '../../types';
 import HaikuPost from '../../components/shared/HaikuPost';
 
@@ -7,8 +7,8 @@ export default function Home() {
   const [haikuPosts, setHaikuPosts] = useState([] as Required<HaikuPostType>[]);
 
   useEffect(() => {
-    const getHaikuPosts = async () => {
-      const { data, error } = await haikuPostsQuery;
+    const fetchHaikuPosts = async () => {
+      const { data, error } = await getHaikuPosts();
 
       if (error) {
         // set error and display error screen
@@ -18,7 +18,7 @@ export default function Home() {
       setHaikuPosts(data);
     };
 
-    getHaikuPosts();
+    fetchHaikuPosts();
   }, []);
 
   return (

@@ -30,8 +30,11 @@ export const getAvatarUrl = async (filePath: string) => {
   return res;
 };
 
-export const haikuPostsQuery = supabase
-  .from('haikus')
-  .select(`id, content, created_at, profiles (username)`)
-  .order('created_at', { ascending: false })
-  .returns<Required<HaikuPostType>[]>();
+export const getHaikuPosts = async () => {
+  const res = await supabase
+    .from('haikus')
+    .select(`id, content, created_at, profiles (username)`)
+    .order('created_at', { ascending: false })
+    .returns<Required<HaikuPostType>[]>();
+  return res;
+};
