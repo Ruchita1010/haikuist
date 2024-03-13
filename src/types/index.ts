@@ -10,5 +10,6 @@ export type HaikuPostType = {
   created_at: Date;
   profiles: {
     username: string;
+    avatar_url: string;
   };
 };

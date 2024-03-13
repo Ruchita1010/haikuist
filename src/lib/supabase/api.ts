@@ -27,7 +27,7 @@ export const getAvatarUrl = (filePath: string) => {
 export const getHaikuPosts = () => {
   return supabase
     .from('haikus')
-    .select(`id, content, created_at, profiles (username)`)
+    .select(`id, content, created_at, profiles (username, avatar_url)`)
     .order('created_at', { ascending: false })
     .returns<Required<HaikuPostType>[]>();
 };
