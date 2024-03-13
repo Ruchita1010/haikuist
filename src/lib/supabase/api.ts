@@ -24,6 +24,10 @@ export const getAvatarUrl = (filePath: string) => {
   return supabase.storage.from('avatars').getPublicUrl(filePath);
 };
 
+export const createHaikuPosts = (userId: string, haiku: string) => {
+  return supabase.from('haikus').insert({ profile_id: userId, content: haiku });
+};
+
 export const getHaikuPosts = () => {
   return supabase
     .from('haikus')

@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { supabase } from '../../lib/supabase/supabaseClient';
 import { HaikuSchema, haikuSchema } from '../../lib/validation';
+import { createHaikuPosts } from '../../lib/supabase/api';
 import { useAuth } from '../../context/AuthContext';
 
 export default function Create() {
@@ -18,11 +18,12 @@ export default function Create() {
   const { session } = useAuth();
 
   const onSubmit = async (newHaiku: HaikuSchema) => {
-    const { error } = await supabase
-      .from('haikus')
-      .insert([{ profile_id: session?.user.id, content: newHaiku.haiku }])
-      .select();
+    if (!session) {
+      alert('Please login!');
+      return;
+    }
 
+    const { error } = await createHaikuPosts(session.user.id, newHaiku.haiku);
     if (error) {
       // set toast message
       alert(error.message);
