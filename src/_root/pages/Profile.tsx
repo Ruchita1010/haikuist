@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getUserById, signOutUser } from '../../lib/supabase/api';
+import { getAvatarUrl, getUserById, signOutUser } from '../../lib/supabase/api';
 import { useAuth } from '../../context/AuthContext';
 
 export default function Profile() {
-  const initialUser = { username: '', bio: '', avatar_url: '' };
+  const initialUser = { username: '', bio: '', avatarUrl: '' };
   const [user, setUser] = useState(initialUser);
 
   const { session } = useAuth();
@@ -17,13 +17,18 @@ export default function Profile() {
     }
 
     const getProfile = async () => {
-      const { data, error } = await getUserById(session?.user.id);
+      const { data, error } = await getUserById(session.user.id);
       if (error) {
         alert(error.message);
         return;
       }
-      const { username, bio, avatar_url } = data;
-      setUser({ username, bio, avatar_url });
+
+      const { username, bio, avatar_path } = data;
+      const avatarUrl = avatar_path
+        ? getAvatarUrl(avatar_path).data.publicUrl
+        : '/assets/default-pfp.svg';
+
+      setUser({ username, bio, avatarUrl });
     };
 
     getProfile();
@@ -51,7 +56,7 @@ export default function Profile() {
       <div className="flex flex-col md:flex-row gap-4 mb-2">
         <div className="min-w-32 max-w-32 h-32 overflow-hidden border-2 rounded-full">
           <img
-            src={user.avatar_url || '/assets/default-pfp.svg'}
+            src={user.avatarUrl}
             className="w-full h-full object-cover"
             aria-label="Avatar"
           />

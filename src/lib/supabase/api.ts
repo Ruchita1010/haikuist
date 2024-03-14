@@ -1,9 +1,13 @@
 import { supabase } from './supabaseClient';
 import { HaikuPostType, UserProfile } from '../../types';
 
-// using "await" in these won't do anything useful so directly returning the promise
-// supabase never throws synchronously, so not even using "async"
+export const getAvatarUrl = (filePath: string) => {
+  // getPublicUrl() doesn't make a DB call, simply does string concatenation
+  return supabase.storage.from('avatars').getPublicUrl(filePath);
+};
 
+// using "await" in these funcs won't do anything useful so directly returning the promise
+// supabase never throws synchronously, so not even using "async"
 export const signOutUser = () => {
   return supabase.auth.signOut();
 };
@@ -20,10 +24,6 @@ export const uploadAvatar = (filePath: string, file: File) => {
   return supabase.storage.from('avatars').upload(filePath, file);
 };
 
-export const getAvatarUrl = (filePath: string) => {
-  return supabase.storage.from('avatars').getPublicUrl(filePath);
-};
-
 export const createHaikuPosts = (userId: string, haiku: string) => {
   return supabase.from('haikus').insert({ profile_id: userId, content: haiku });
 };
@@ -31,7 +31,7 @@ export const createHaikuPosts = (userId: string, haiku: string) => {
 export const getHaikuPosts = () => {
   return supabase
     .from('haikus')
-    .select(`id, content, created_at, profiles (username, avatar_url)`)
+    .select(`id, content, created_at, profiles (username, avatar_path)`)
     .order('created_at', { ascending: false })
     .returns<Required<HaikuPostType>[]>();
 };

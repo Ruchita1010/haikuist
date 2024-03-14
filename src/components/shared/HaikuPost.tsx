@@ -1,3 +1,4 @@
+import { getAvatarUrl } from '../../lib/supabase/api';
 import { HaikuPostType } from '../../types';
 import Icon from './Icon';
 
@@ -6,17 +7,20 @@ export default function HaikuPost({
   created_at,
   profiles,
 }: HaikuPostType) {
-  const { username, avatar_url } = profiles;
+  const { username, avatar_path } = profiles;
+
+  const avatarUrl = avatar_path
+    ? getAvatarUrl(avatar_path).data.publicUrl
+    : '/assets/default-pfp.svg';
+
   const lines = content.split('\n');
+
   return (
     <div className="border-b-2 py-3">
       <div className="flex items-center">
         <div className="flex flex-1 items-center gap-4">
           <div className="w-11 h-11 rounded-full overflow-hidden bg-red-400">
-            <img
-              src={avatar_url || '/assets/default-pfp.svg'}
-              className="w-full"
-            />
+            <img src={avatarUrl} className="w-full" />
           </div>
           <p>{username}</p>
         </div>

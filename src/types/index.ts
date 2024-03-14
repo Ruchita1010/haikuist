@@ -1,7 +1,7 @@
 export type UserProfile = {
   username: string;
   bio: string;
-  avatar_url?: string;
+  avatar_path?: string;
 };
 
 export type HaikuPostType = {
@@ -10,6 +10,6 @@ export type HaikuPostType = {
   created_at: Date;
   profiles: {
     username: string;
-    avatar_url: string;
+    avatar_path: string;
   };
 };

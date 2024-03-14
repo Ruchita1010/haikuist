@@ -16,10 +16,10 @@ import Icon from '../../components/shared/Icon';
 import AvatarUpload from './AvatarUpload';
 
 export default function EditProfile() {
-  /* Default values (async) are not set here to avoid setting undefined as a default value,
-    which can cause issues according to RHF documentation. Also, setting to null 
-    may not be desirable as it would require changing the Zod schema. Instead 
-    Ref: https://react-hook-form.com/docs/useform#defaultValues */
+  // Default values (async) are not set here to avoid setting undefined as a default value,
+  // which can cause issues according to RHF documentation. Also, setting to null
+  // may not be desirable as it would require changing the Zod schema. Instead
+  // Ref: https://react-hook-form.com/docs/useform#defaultValues
   const {
     register,
     handleSubmit,
@@ -36,7 +36,6 @@ export default function EditProfile() {
   );
 
   useEffect(() => {
-    // Fetches and populates user profile data into input fields
     const fetchUserProfile = async () => {
       if (!session) {
         alert('Please log in to update your profile');
@@ -49,11 +48,14 @@ export default function EditProfile() {
         return;
       }
 
-      const { username, bio, avatar_url } = data;
+      const { username, bio, avatar_path } = data;
       setValue('username', username);
       setValue('bio', bio);
-      setAvatarUrl(avatar_url);
-      setCurrentProfile({ username, bio, avatar_url });
+
+      const { publicUrl } = getAvatarUrl(avatar_path).data;
+      setAvatarUrl(publicUrl);
+
+      setCurrentProfile({ username, bio, avatar_path });
     };
 
     fetchUserProfile();
@@ -98,8 +100,7 @@ export default function EditProfile() {
         return;
       }
 
-      const { data } = await getAvatarUrl(filePath);
-      updates.avatar_url = data.publicUrl;
+      updates.avatar_path = filePath;
     }
 
     const { error } = await updateProfile(updates, userId);
@@ -107,9 +108,9 @@ export default function EditProfile() {
       alert(error.message);
       return;
     }
-    /* Case: If the user changes the avatar and hits "Save". Right again, if the user doesn't change the avatar (or any other field) 
-      and again hits "Save", the check "avatar.length > 0" still results in true and calls are made to the DB for the same file. 
-      To prevent that for now, resetField is used. However, using "resetField" results in the field being set to undefined.*/
+    // Case: If the user changes the avatar and hits "Save". Right again, if the user doesn't change the avatar (or any other field)
+    //  and again hits "Save", the check "avatar.length > 0" still results in true and calls are made to the DB for the same file.
+    // To prevent that for now, resetField is used. However, using "resetField" results in the field being set to undefined.
     resetField('avatar');
   };
 
