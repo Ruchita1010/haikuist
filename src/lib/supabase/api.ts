@@ -31,7 +31,30 @@ export const createHaikuPosts = (userId: string, haiku: string) => {
 export const getHaikuPosts = () => {
   return supabase
     .from('haikus')
-    .select(`id, content, created_at, profiles (username, avatar_path)`)
+    .select(`id, content, created_at, profiles (id, username, avatar_path)`)
     .order('created_at', { ascending: false })
     .returns<Required<HaikuPostType>[]>();
+};
+
+export const likeHaikuPost = (haikuId: string, userId: string) => {
+  return supabase
+    .from('likes')
+    .insert({ haiku_id: haikuId, profile_id: userId });
+};
+
+export const unlikeHaikuPost = (haikuId: string, userId: string) => {
+  return supabase
+    .from('likes')
+    .delete()
+    .eq('haiku_id', haikuId)
+    .eq('profile_id', userId);
+};
+
+export const checkIsLiked = (haikuId: string, userId: string) => {
+  return supabase
+    .from('likes')
+    .select('id')
+    .eq('haiku_id', haikuId)
+    .eq('profile_id', userId)
+    .maybeSingle();
 };

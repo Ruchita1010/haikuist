@@ -5,10 +5,11 @@ export type UserProfile = {
 };
 
 export type HaikuPostType = {
-  id?: string;
+  id: string;
   content: string;
   created_at: Date;
   profiles: {
+    id: string;
     username: string;
     avatar_path: string;
   };

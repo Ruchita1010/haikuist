@@ -1,13 +1,14 @@
 import { getAvatarUrl } from '../../lib/supabase/api';
 import { HaikuPostType } from '../../types';
-import Icon from './Icon';
+import HaikuPostActions from './HaikuPostActions';
 
 export default function HaikuPost({
+  id,
   content,
   created_at,
   profiles,
 }: HaikuPostType) {
-  const { username, avatar_path } = profiles;
+  const { id: userId, username, avatar_path } = profiles;
 
   const avatarUrl = avatar_path
     ? getAvatarUrl(avatar_path).data.publicUrl
@@ -31,22 +32,7 @@ export default function HaikuPost({
           <p>{line}</p>
         ))}
       </div>
-      <div className="flex justify-between">
-        <div className="flex gap-5">
-          <Icon
-            id="icon-like"
-            className="w-6 h-6 fill-none stroke-current cursor-pointer"
-          />
-          <Icon
-            id="icon-comment"
-            className="w-6 h-6 fill-none stroke-current cursor-pointer"
-          />
-        </div>
-        <Icon
-          id="icon-save"
-          className="w-6 h-6 fill-none stroke-current cursor-pointer"
-        />
-      </div>
+      <HaikuPostActions haikuId={id} userId={userId} />
     </div>
   );
 }
