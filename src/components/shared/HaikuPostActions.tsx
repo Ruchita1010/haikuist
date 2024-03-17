@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import {
   checkIsLiked,
+  checkIsSaved,
   likeHaikuPost,
+  saveHaikuPost,
   unlikeHaikuPost,
+  unsaveHaikuPost,
 } from '../../lib/supabase/api';
 import Icon from './Icon';
 
@@ -16,16 +19,22 @@ export default function HaikuPostActions({
   userId,
 }: HaikuPostActionsProp) {
   const [hasLiked, setHasLiked] = useState(false);
+  const [hasSaved, setHasSaved] = useState(false);
 
   useEffect(() => {
     (async () => {
-      const { data, error } = await checkIsLiked(haikuId, userId);
-      if (error) {
-        alert(error.message);
-        return;
+      const likeResult = await checkIsLiked(haikuId, userId);
+      if (likeResult.error) {
+        alert(likeResult.error.message);
+      } else {
+        likeResult.data && setHasLiked(true);
       }
-      if (data) {
-        setHasLiked(true);
+
+      const savedResult = await checkIsSaved(haikuId, userId);
+      if (savedResult.error) {
+        alert(savedResult.error.message);
+      } else {
+        savedResult.data && setHasSaved(true);
       }
     })();
   }, []);
@@ -39,6 +48,17 @@ export default function HaikuPostActions({
       return;
     }
     setHasLiked(!hasLiked);
+  };
+
+  const handleSave = async (haikuId: string, userId: string) => {
+    const { error } = await (hasSaved
+      ? unsaveHaikuPost(haikuId, userId)
+      : saveHaikuPost(haikuId, userId));
+    if (error) {
+      alert(error.message);
+      return;
+    }
+    setHasSaved(!hasSaved);
   };
 
   return (
@@ -59,10 +79,12 @@ export default function HaikuPostActions({
           />
         </button>
       </div>
-      <button>
+      <button onClick={() => handleSave(haikuId, userId)}>
         <Icon
           id="icon-save"
-          className="w-6 h-6 fill-none stroke-current cursor-pointer"
+          className={`w-6 h-6 ${
+            hasSaved ? 'fill-current text-sky-400' : 'fill-none'
+          } stroke-current cursor-pointer`}
         />
       </button>
     </div>

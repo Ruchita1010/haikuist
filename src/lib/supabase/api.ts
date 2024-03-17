@@ -58,3 +58,26 @@ export const checkIsLiked = (haikuId: string, userId: string) => {
     .eq('profile_id', userId)
     .maybeSingle();
 };
+
+export const saveHaikuPost = (haikuId: string, userId: string) => {
+  return supabase
+    .from('saves')
+    .insert({ haiku_id: haikuId, profile_id: userId });
+};
+
+export const unsaveHaikuPost = (haikuId: string, userId: string) => {
+  return supabase
+    .from('saves')
+    .delete()
+    .eq('haiku_id', haikuId)
+    .eq('profile_id', userId);
+};
+
+export const checkIsSaved = (haikuId: string, userId: string) => {
+  return supabase
+    .from('saves')
+    .select('id')
+    .eq('haiku_id', haikuId)
+    .eq('profile_id', userId)
+    .maybeSingle();
+};
