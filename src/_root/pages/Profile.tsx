@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAvatarUrl, getUserById, signOutUser } from '../../lib/supabase/api';
 import { useAuth } from '../../context/AuthContext';
+import TabList from '../../components/shared/Tablist';
 
 export default function Profile() {
   const initialUser = { username: '', bio: '', avatarUrl: '' };
@@ -43,8 +44,14 @@ export default function Profile() {
     navigate('/signin', { replace: true });
   };
 
+  const tabs = [
+    { id: 'haikus', path: '/profile', label: 'Haikus' },
+    { id: 'likes', path: '/profile/likes', label: 'Likes' },
+    { id: 'saves', path: '/profile/saves', label: 'Saves' },
+  ];
+
   return (
-    <div className="border-b-2">
+    <>
       <div className="grid justify-items-end p-4 mb-4">
         <button
           type="button"
@@ -76,6 +83,7 @@ export default function Profile() {
           Edit Profile
         </Link>
       </div>
-    </div>
+      <TabList tabs={tabs} />
+    </>
   );
 }
