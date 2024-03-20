@@ -27,6 +27,7 @@ export default function Home() {
         return (
           <HaikuPost
             key={id}
+            id={id}
             content={content}
             created_at={created_at}
             profiles={profiles}
