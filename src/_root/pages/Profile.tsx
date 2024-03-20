@@ -1,8 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { getAvatarUrl, getUserById, signOutUser } from '../../lib/supabase/api';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import {
+  getAvatarUrl,
+  getUserById,
+  getUserHaikuPosts,
+  getLikedHaikuPosts,
+  getSavedHaikuPosts,
+  signOutUser,
+} from '../../lib/supabase/api';
 import { useAuth } from '../../context/AuthContext';
 import TabList from '../../components/shared/Tablist';
+import Tab from '../../components/shared/Tab';
 
 export default function Profile() {
   const initialUser = { username: '', bio: '', avatarUrl: '' };
@@ -84,6 +92,21 @@ export default function Profile() {
         </Link>
       </div>
       <TabList tabs={tabs} />
+
+      <Routes>
+        <Route
+          index
+          element={<Tab key="haikus" getData={getUserHaikuPosts} />}
+        />
+        <Route
+          path="/likes"
+          element={<Tab key="likes" getData={getLikedHaikuPosts} />}
+        />
+        <Route
+          path="/saves"
+          element={<Tab key="saves" getData={getSavedHaikuPosts} />}
+        />
+      </Routes>
     </>
   );
 }

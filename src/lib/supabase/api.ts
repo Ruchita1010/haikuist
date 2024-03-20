@@ -81,3 +81,34 @@ export const checkIsSaved = (haikuId: string, userId: string) => {
     .eq('profile_id', userId)
     .maybeSingle();
 };
+
+export const getUserHaikuPosts = (userId: string) => {
+  return supabase
+    .from('haikus')
+    .select('id, content, created_at, profiles (id, username, avatar_path)')
+    .eq('profile_id', userId)
+    .order('created_at', { ascending: false })
+    .returns<Required<HaikuPostType>[]>();
+};
+
+export const getLikedHaikuPosts = (userId: string) => {
+  return supabase
+    .from('haikus')
+    .select(
+      'id, content, created_at, profiles(id, username, avatar_path), likes!inner()'
+    )
+    .eq('likes.profile_id', userId)
+    .order('created_at', { referencedTable: 'likes', ascending: false })
+    .returns<Required<HaikuPostType>[]>();
+};
+
+export const getSavedHaikuPosts = (userId: string) => {
+  return supabase
+    .from('haikus')
+    .select(
+      'id, content, created_at, profiles(id, username, avatar_path), saves!inner()'
+    )
+    .eq('saves.profile_id', userId)
+    .order('created_at', { referencedTable: 'saves', ascending: false })
+    .returns<Required<HaikuPostType>[]>();
+};
