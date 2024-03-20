@@ -1,5 +1,6 @@
 import { getAvatarUrl } from '../../lib/supabase/api';
 import { HaikuPostType } from '../../types';
+import { useAuth } from '../../context/AuthContext';
 import HaikuPostActions from './HaikuPostActions';
 
 export default function HaikuPost({
@@ -8,7 +9,13 @@ export default function HaikuPost({
   created_at,
   profiles,
 }: HaikuPostType) {
-  const { id: userId, username, avatar_path } = profiles;
+  const { session } = useAuth();
+  if (!session) {
+    alert('Please log in!');
+    return;
+  }
+
+  const { username, avatar_path } = profiles;
 
   const avatarUrl = avatar_path
     ? getAvatarUrl(avatar_path).data.publicUrl
@@ -32,7 +39,7 @@ export default function HaikuPost({
           <p>{line}</p>
         ))}
       </div>
-      <HaikuPostActions haikuId={id} userId={userId} />
+      <HaikuPostActions haikuId={id} userId={session.user.id} />
     </div>
   );
 }
