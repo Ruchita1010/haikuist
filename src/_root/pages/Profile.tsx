@@ -86,7 +86,7 @@ export default function Profile() {
       </div>
       <div className="grid justify-items-end p-4">
         <Link
-          to={'/edit-profile'}
+          to="/edit-profile"
           className="px-4 py-2 text-center border border-zinc-400 outline-4 outline-zinc-500 rounded-md">
           Edit Profile
         </Link>

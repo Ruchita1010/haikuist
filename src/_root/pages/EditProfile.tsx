@@ -116,7 +116,7 @@ export default function EditProfile() {
 
   return (
     <div>
-      <Link to={'/profile'} aria-label="Back">
+      <Link to="/profile" aria-label="Back">
         <Icon
           id="icon-back"
           className="w-6 h-6 fill-none stroke-current cursor-pointer"
