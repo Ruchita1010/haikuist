@@ -8,6 +8,7 @@ import {
   unsaveHaikuPost,
 } from '../../lib/supabase/api';
 import Icon from './Icon';
+import CommentInput from './CommentInput';
 
 type HaikuPostActionsProp = {
   haikuId: string;
@@ -20,6 +21,7 @@ export default function HaikuPostActions({
 }: HaikuPostActionsProp) {
   const [hasLiked, setHasLiked] = useState(false);
   const [hasSaved, setHasSaved] = useState(false);
+  const [commentInputVisible, setCommentInputVisible] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -62,31 +64,36 @@ export default function HaikuPostActions({
   };
 
   return (
-    <div className="flex justify-between">
-      <div className="flex gap-5">
-        <button onClick={() => handleLike(haikuId, userId)}>
+    <>
+      <div className="flex justify-between">
+        <div className="flex gap-5">
+          <button onClick={() => handleLike(haikuId, userId)}>
+            <Icon
+              id="icon-like"
+              className={`w-6 h-6 ${
+                hasLiked ? 'fill-current text-red-600' : 'fill-none'
+              } stroke-current cursor-pointer`}
+            />
+          </button>
+          <button onClick={() => setCommentInputVisible(!commentInputVisible)}>
+            <Icon
+              id="icon-comment"
+              className="w-6 h-6 fill-none stroke-current cursor-pointer"
+            />
+          </button>
+        </div>
+        <button onClick={() => handleSave(haikuId, userId)}>
           <Icon
-            id="icon-like"
+            id="icon-save"
             className={`w-6 h-6 ${
-              hasLiked ? 'fill-current text-red-600' : 'fill-none'
+              hasSaved ? 'fill-current text-sky-400' : 'fill-none'
             } stroke-current cursor-pointer`}
           />
         </button>
-        <button>
-          <Icon
-            id="icon-comment"
-            className="w-6 h-6 fill-none stroke-current cursor-pointer"
-          />
-        </button>
       </div>
-      <button onClick={() => handleSave(haikuId, userId)}>
-        <Icon
-          id="icon-save"
-          className={`w-6 h-6 ${
-            hasSaved ? 'fill-current text-sky-400' : 'fill-none'
-          } stroke-current cursor-pointer`}
-        />
-      </button>
-    </div>
+      {commentInputVisible && (
+        <CommentInput haikuId={haikuId} userId={userId} />
+      )}
+    </>
   );
 }

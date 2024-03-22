@@ -75,3 +75,13 @@ export const profileSchema = z.object({
 });
 
 export type ProfileSchema = z.infer<typeof profileSchema>;
+
+export const commentSchema = z.object({
+  comment: z
+    .string()
+    .trim()
+    .min(1, { message: 'Must be non empty' })
+    .max(272, { message: 'Must not exceed 272 characters' }),
+});
+
+export type CommentSchema = z.infer<typeof commentSchema>;

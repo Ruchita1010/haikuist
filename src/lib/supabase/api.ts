@@ -112,3 +112,13 @@ export const getSavedHaikuPosts = (userId: string) => {
     .order('created_at', { referencedTable: 'saves', ascending: false })
     .returns<Required<HaikuPostType>[]>();
 };
+
+export const addComment = (
+  haikuId: string,
+  userId: string,
+  comment: string
+) => {
+  return supabase
+    .from('comments')
+    .insert({ haiku_id: haikuId, profile_id: userId, content: comment });
+};
