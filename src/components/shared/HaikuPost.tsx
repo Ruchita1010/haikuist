@@ -36,7 +36,7 @@ export default function HaikuPost({
       </div>
       <div className="text-lg pt-4 pb-6">
         {lines.map((line) => (
-          <p>{line}</p>
+          <p className="break-words">{line}</p>
         ))}
       </div>
       <HaikuPostActions haikuId={id} userId={session.user.id} />
