@@ -30,7 +30,7 @@ export default function EditProfile() {
     resolver: zodResolver(profileSchema),
   });
   const { session } = useAuth();
-  const [avatarUrl, setAvatarUrl] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState('/assets/default-pfp.svg');
   const [currentProfile, setCurrentProfile] = useState<UserProfile | null>(
     null
   );
@@ -52,9 +52,10 @@ export default function EditProfile() {
       setValue('username', username);
       setValue('bio', bio);
 
-      const { publicUrl } = getAvatarUrl(avatar_path).data;
-      setAvatarUrl(publicUrl);
-
+      if (avatar_path !== '') {
+        const { publicUrl } = getAvatarUrl(avatar_path).data;
+        setAvatarUrl(publicUrl);
+      }
       setCurrentProfile({ username, bio, avatar_path });
     };
 

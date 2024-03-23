@@ -27,7 +27,7 @@ export default function AvatarUpload({
 
   const avatarSrc = selectedImage
     ? URL.createObjectURL(selectedImage)
-    : avatarUrl || '/assets/default-pfp.svg';
+    : avatarUrl;
 
   useEffect(() => {
     return () => {
