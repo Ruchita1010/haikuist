@@ -40,10 +40,10 @@ export default function AvatarUpload({
 
   return (
     <div className="flex flex-col gap-3 mb-8 justify-center items-center">
-      <div className="rounded-full overflow-hidden border-2">
+      <div className="w-36 h-36 rounded-full overflow-hidden border-2">
         <img
           src={avatarSrc}
-          className="w-36 h-36 object-cover"
+          className="w-full h-full object-cover"
           aria-label="Avatar"
           alt="Avatar"
         />
