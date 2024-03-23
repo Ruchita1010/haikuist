@@ -43,9 +43,9 @@ export default function AvatarUpload({
       <div className="w-36 h-36 rounded-full overflow-hidden border-2">
         <img
           src={avatarSrc}
-          className="w-full h-full object-cover"
-          aria-label="Avatar"
+          aria-label="Your current avatar"
           alt="Avatar"
+          className="w-full h-full object-cover"
         />
       </div>
       <input

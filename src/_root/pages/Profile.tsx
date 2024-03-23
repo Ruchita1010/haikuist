@@ -72,8 +72,8 @@ export default function Profile() {
         <div className="min-w-32 max-w-32 h-32 overflow-hidden border-2 rounded-full">
           <img
             src={user.avatarUrl}
+            alt="Avatar"
             className="w-full h-full object-cover"
-            aria-label="Avatar"
           />
         </div>
         <div className="flex flex-col justify-around">

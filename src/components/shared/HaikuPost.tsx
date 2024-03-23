@@ -28,7 +28,11 @@ export default function HaikuPost({
       <div className="flex items-center">
         <div className="flex flex-1 items-center gap-4">
           <div className="w-11 h-11 rounded-full overflow-hidden bg-red-400">
-            <img src={avatarUrl} className="w-full" />
+            <img
+              src={avatarUrl}
+              alt={`${username}'s avatar`}
+              className="w-full"
+            />
           </div>
           <p>{username}</p>
         </div>
