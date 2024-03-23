@@ -14,3 +14,13 @@ export type HaikuPostType = {
     avatar_path: string;
   };
 };
+
+export type Comment = {
+  id: string;
+  content: string;
+  created_at: Date;
+  profiles: {
+    username: string;
+    avatar_path: string;
+  };
+};

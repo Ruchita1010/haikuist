@@ -3,7 +3,7 @@ import AuthLayout from './_auth/AuthLayout';
 import SigninForm from './_auth/forms/SigninForm';
 import SignupForm from './_auth/forms/SignupForm';
 import RootLayout from './_root/RootLayout';
-import { Create, EditProfile, Home, Profile } from './_root/pages';
+import { Comments, Create, EditProfile, Home, Profile } from './_root/pages';
 import './globals.css';
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
         {/* private routes */}
         <Route element={<RootLayout />}>
           <Route path="/home" element={<Home />} />
+          <Route path="/haiku/:id" element={<Comments />} />
           <Route path="/create" element={<Create />} />
           <Route path="/profile/*" element={<Profile />} />
           <Route path="/edit-profile" element={<EditProfile />} />

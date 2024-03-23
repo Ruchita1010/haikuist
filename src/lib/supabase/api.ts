@@ -1,5 +1,5 @@
 import { supabase } from './supabaseClient';
-import { HaikuPostType, UserProfile } from '../../types';
+import { Comment, HaikuPostType, UserProfile } from '../../types';
 
 export const getAvatarUrl = (filePath: string) => {
   // getPublicUrl() doesn't make a DB call, simply does string concatenation
@@ -121,4 +121,12 @@ export const addComment = (
   return supabase
     .from('comments')
     .insert({ haiku_id: haikuId, profile_id: userId, content: comment });
+};
+
+export const getComments = (haikuId: string) => {
+  return supabase
+    .from('comments')
+    .select('id, content, created_at, profiles(username, avatar_path)')
+    .eq('haiku_id', haikuId)
+    .returns<Comment[]>();
 };

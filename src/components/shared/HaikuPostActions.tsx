@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   checkIsLiked,
   checkIsSaved,
@@ -66,7 +67,7 @@ export default function HaikuPostActions({
   return (
     <>
       <div className="flex justify-between">
-        <div className="flex gap-5">
+        <div className="flex gap-5 items-center">
           <button onClick={() => handleLike(haikuId, userId)}>
             <Icon
               id="icon-like"
@@ -81,6 +82,11 @@ export default function HaikuPostActions({
               className="w-6 h-6 fill-none stroke-current cursor-pointer"
             />
           </button>
+          <Link
+            to={`/haiku/${haikuId}`}
+            className="text-sm text-zinc-500 underline">
+            View comments
+          </Link>
         </div>
         <button onClick={() => handleSave(haikuId, userId)}>
           <Icon
