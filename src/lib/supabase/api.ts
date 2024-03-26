@@ -1,5 +1,10 @@
 import { supabase } from './supabaseClient';
-import { Comment, HaikuPostType, UserProfile } from '../../types';
+import {
+  AppNotification,
+  Comment,
+  HaikuPostType,
+  UserProfile,
+} from '../../types';
 
 export const getAvatarUrl = (filePath: string) => {
   // getPublicUrl() doesn't make a DB call, simply does string concatenation
@@ -129,4 +134,22 @@ export const getComments = (haikuId: string) => {
     .select('id, content, created_at, profiles(username, avatar_path)')
     .eq('haiku_id', haikuId)
     .returns<Comment[]>();
+};
+
+export const setNotificationsAsRead = (userId: string) => {
+  return supabase
+    .from('notifications')
+    .update({ is_read: true })
+    .eq('recipient_profile_id', userId);
+};
+
+export const getNotifications = (userId: string) => {
+  return supabase
+    .from('notifications')
+    .select(
+      'id, haiku:haikus(id, content), type, sender_profile:sender_profile_id(username, avatar_path)'
+    )
+    .eq('recipient_profile_id', userId)
+    .order('created_at', { ascending: false })
+    .returns<AppNotification[]>();
 };

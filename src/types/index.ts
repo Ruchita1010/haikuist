@@ -24,3 +24,16 @@ export type Comment = {
     avatar_path: string;
   };
 };
+
+export type AppNotification = {
+  id: string;
+  type: 'like' | 'comment';
+  haiku: {
+    id: string;
+    content: string;
+  };
+  sender_profile: {
+    username: string;
+    avatar_path: string;
+  };
+};

@@ -3,7 +3,14 @@ import AuthLayout from './_auth/AuthLayout';
 import SigninForm from './_auth/forms/SigninForm';
 import SignupForm from './_auth/forms/SignupForm';
 import RootLayout from './_root/RootLayout';
-import { Comments, Create, EditProfile, Home, Profile } from './_root/pages';
+import {
+  Comments,
+  Create,
+  EditProfile,
+  Home,
+  Notifications,
+  Profile,
+} from './_root/pages';
 import './globals.css';
 
 function App() {
@@ -24,6 +31,7 @@ function App() {
           <Route path="/create" element={<Create />} />
           <Route path="/profile/*" element={<Profile />} />
           <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/notifications" element={<Notifications />} />
         </Route>
       </Routes>
     </div>
