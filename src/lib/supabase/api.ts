@@ -153,3 +153,11 @@ export const getNotifications = (userId: string) => {
     .order('created_at', { ascending: false })
     .returns<AppNotification[]>();
 };
+
+export const getNotificationCount = (userId: string) => {
+  return supabase
+    .from('notifications')
+    .select('*', { count: 'exact', head: true })
+    .eq('recipient_profile_id', userId)
+    .eq('is_read', false);
+};
