@@ -26,7 +26,7 @@ export default function HaikuPost({
   return (
     <div className="border-b-2 py-3">
       <div className="flex items-center">
-        <div className="flex flex-1 items-center gap-4">
+        <div className="flex flex-1 items-center gap-2">
           <div className="w-11 h-11 rounded-full overflow-hidden bg-red-400">
             <img
               src={avatarUrl}
@@ -34,9 +34,11 @@ export default function HaikuPost({
               className="w-full"
             />
           </div>
-          <p>{username}</p>
+          <span>{username}</span>
         </div>
-        <p>{created_at.toString()}</p>
+        <span className="text-sm">
+          <time dateTime={created_at.toString()}>{created_at.toString()}</time>
+        </span>
       </div>
       <div className="text-lg pt-4 pb-6">
         {lines.map((line) => (
