@@ -36,7 +36,10 @@ export default function Notifications() {
   }, [session]);
 
   return (
-    <div className="grid">
+    <section aria-labelledby="accessible-list-2" className="grid">
+      <h1 id="accessible-list-2" className="sr-only">
+        Notifications
+      </h1>
       {notifications.length === 0 ? (
         <p className="text-lg">No notifications yet</p>
       ) : (
@@ -51,6 +54,6 @@ export default function Notifications() {
           );
         })
       )}
-    </div>
+    </section>
   );
 }

@@ -22,7 +22,12 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-4 min-h-screen">
+    <section
+      aria-labelledby="accessible-list-1"
+      className="flex flex-col gap-2 min-h-screen">
+      <h1 id="accessible-list-1" className="sr-only">
+        Home
+      </h1>
       {haikuPosts.map(({ id, content, created_at, profiles }) => {
         return (
           <HaikuPost
@@ -34,6 +39,6 @@ export default function Home() {
           />
         );
       })}
-    </div>
+    </section>
   );
 }

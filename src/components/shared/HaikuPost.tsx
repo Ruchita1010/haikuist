@@ -25,7 +25,7 @@ export default function HaikuPost({
   const lines = content.split('\n');
 
   return (
-    <div className="border-b-2 py-3">
+    <article className="border-b-2 py-3">
       <div className="flex items-center">
         <div className="flex flex-1 items-center gap-2">
           <div className="w-11 h-11 rounded-full overflow-hidden bg-red-400">
@@ -47,6 +47,6 @@ export default function HaikuPost({
         ))}
       </div>
       <HaikuPostActions haikuId={id} userId={session.user.id} />
-    </div>
+    </article>
   );
 }

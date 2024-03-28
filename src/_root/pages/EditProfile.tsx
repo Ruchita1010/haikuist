@@ -117,6 +117,7 @@ export default function EditProfile() {
 
   return (
     <div>
+      <h1 className="sr-only">Edit Profile</h1>
       <Link to="/profile" aria-label="Back">
         <Icon
           id="icon-back"

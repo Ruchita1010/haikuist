@@ -13,7 +13,7 @@ export default function Notification({
   const lines = content.split('\n');
 
   return (
-    <div className="grid grid-cols-[auto,minmax(0,1fr)] gap-3 py-3 border-b-2">
+    <article className="grid grid-cols-[auto,minmax(0,1fr)] gap-3 py-3 border-b-2">
       <Icon
         id={`icon-${type}`}
         className={`h-8 w-8 ${
@@ -53,6 +53,6 @@ export default function Notification({
           ))}
         </div>
       </div>
-    </div>
+    </article>
   );
 }

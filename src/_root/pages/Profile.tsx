@@ -60,7 +60,10 @@ export default function Profile() {
   ];
 
   return (
-    <>
+    <section aria-labelledby="accessible-list-4">
+      <h1 id="accessible-list-4" className="sr-only">
+        Profile
+      </h1>
       <div className="grid justify-items-end p-4 mb-4">
         <button
           type="button"
@@ -116,6 +119,6 @@ export default function Profile() {
           }
         />
       </Routes>
-    </>
+    </section>
   );
 }

@@ -46,7 +46,7 @@ export default function Comments() {
             profiles: { username, avatar_path },
           }) => {
             return (
-              <div
+              <article
                 key={id}
                 className="grid grid-cols-[auto,minmax(0,1fr)] items-start gap-3 py-4">
                 <div className="w-11 h-11 overflow-hidden rounded-full">
@@ -72,7 +72,7 @@ export default function Comments() {
                   </div>
                   <p className="break-words">{content}</p>
                 </div>
-              </div>
+              </article>
             );
           }
         )
