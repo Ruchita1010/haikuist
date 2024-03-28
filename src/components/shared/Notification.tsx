@@ -48,8 +48,10 @@ export default function Notification({
           </div>
         </div>
         <div className="text-zinc-400">
-          {lines.map((line) => (
-            <p className="break-words">{line}</p>
+          {lines.map((line, index) => (
+            <p key={index} className="break-words">
+              {line}
+            </p>
           ))}
         </div>
       </div>
