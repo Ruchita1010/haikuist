@@ -73,13 +73,11 @@ export default function Profile() {
         </button>
       </div>
       <div className="flex flex-col md:flex-row gap-4 mb-2">
-        <div className="min-w-32 max-w-32 h-32 overflow-hidden border-2 rounded-full">
-          <img
-            src={user.avatarUrl}
-            alt="Avatar"
-            className="w-full h-full object-cover"
-          />
-        </div>
+        <img
+          src={user.avatarUrl}
+          alt="Avatar"
+          className="flex-shrink-0 w-32 h-32 object-cover rounded-full"
+        />
         <div className="flex flex-col justify-around">
           <div>
             <p className="text-xl font-bold">{user.username}</p>

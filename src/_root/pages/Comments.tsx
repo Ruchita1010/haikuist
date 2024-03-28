@@ -49,17 +49,15 @@ export default function Comments() {
               <article
                 key={id}
                 className="grid grid-cols-[auto,minmax(0,1fr)] items-start gap-3 py-4">
-                <div className="w-11 h-11 overflow-hidden rounded-full">
-                  <img
-                    src={
-                      avatar_path
-                        ? getAvatarUrl(avatar_path).data.publicUrl
-                        : '/assets/default-pfp.svg'
-                    }
-                    alt={`${username}'s avatar`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <img
+                  src={
+                    avatar_path
+                      ? getAvatarUrl(avatar_path).data.publicUrl
+                      : '/assets/default-pfp.svg'
+                  }
+                  alt={`${username}'s avatar`}
+                  className="flex-shrink-0 w-11 h-11 object-cover rounded-full"
+                />
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="font-bold">{username}</span>

@@ -40,14 +40,12 @@ export default function AvatarUpload({
 
   return (
     <div className="flex flex-col gap-3 mb-8 justify-center items-center">
-      <div className="w-36 h-36 rounded-full overflow-hidden border-2">
-        <img
-          src={avatarSrc}
-          aria-label="Your current avatar"
-          alt="Avatar"
-          className="w-full h-full object-cover"
-        />
-      </div>
+      <img
+        src={avatarSrc}
+        aria-label="Your current avatar"
+        alt="Avatar"
+        className="flex-shrink-0 w-36 h-36 object-cover rounded-full"
+      />
       <input
         type="file"
         accept="image/jpeg, image/jpg, image/png, image/webp"

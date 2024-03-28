@@ -28,13 +28,11 @@ export default function HaikuPost({
     <article className="border-b-2 py-3">
       <div className="flex items-center">
         <div className="flex flex-1 items-center gap-2">
-          <div className="w-11 h-11 rounded-full overflow-hidden bg-red-400">
-            <img
-              src={avatarUrl}
-              alt={`${username}'s avatar`}
-              className="w-full"
-            />
-          </div>
+          <img
+            src={avatarUrl}
+            alt={`${username}'s avatar`}
+            className="flex-shrink-0 w-11 h-11 object-cover rounded-full"
+          />
           <span>{username}</span>
         </div>
         <span className="text-sm">
