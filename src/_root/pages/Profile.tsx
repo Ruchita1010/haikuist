@@ -9,11 +9,12 @@ import {
   signOutUser,
 } from '../../lib/supabase/api';
 import { useAuth } from '../../context/AuthContext';
+import { formatMonthYear } from '../../utils/dateFormatter';
 import TabList from '../../components/shared/Tablist';
 import Tab from '../../components/shared/Tab';
 
 export default function Profile() {
-  const initialUser = { username: '', bio: '', avatarUrl: '' };
+  const initialUser = { username: '', bio: '', avatarUrl: '', created_at: '' };
   const [user, setUser] = useState(initialUser);
 
   const { session } = useAuth();
@@ -32,12 +33,12 @@ export default function Profile() {
         return;
       }
 
-      const { username, bio, avatar_path } = data;
+      const { username, bio, avatar_path, created_at } = data;
       const avatarUrl = avatar_path
         ? getAvatarUrl(avatar_path).data.publicUrl
         : '/assets/default-pfp.svg';
 
-      setUser({ username, bio, avatarUrl });
+      setUser({ username, bio, avatarUrl, created_at });
     };
 
     getProfile();
@@ -79,7 +80,9 @@ export default function Profile() {
         <div className="flex flex-col justify-around">
           <div>
             <p className="text-xl font-bold">{user.username}</p>
-            <p>Joined August 2022</p>
+            <p className="text-zinc-500">
+              Joined {formatMonthYear(user.created_at)}
+            </p>
           </div>
           <p className="mt-2">{user.bio}</p>
         </div>

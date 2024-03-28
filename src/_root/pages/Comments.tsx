@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getAvatarUrl, getComments } from '../../lib/supabase/api';
 import { Comment } from '../../types';
+import { formatRelativeTime } from '../../utils/dateFormatter';
 import Icon from '../../components/shared/Icon';
 
 export default function Comments() {
@@ -63,9 +64,9 @@ export default function Comments() {
                   <div className="flex items-center gap-2">
                     <span className="font-bold">{username}</span>
                     <span>•</span>
-                    <span className="text-sm">
-                      <time dateTime={created_at.toString()}>
-                        {created_at.toString()}
+                    <span className="text-sm text-zinc-500">
+                      <time dateTime={created_at}>
+                        {formatRelativeTime(created_at)}
                       </time>
                     </span>
                   </div>

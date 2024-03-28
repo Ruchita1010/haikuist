@@ -1,6 +1,7 @@
 import { getAvatarUrl } from '../../lib/supabase/api';
 import { HaikuPostType } from '../../types';
 import { useAuth } from '../../context/AuthContext';
+import { formatRelativeTime } from '../../utils/dateFormatter';
 import HaikuPostActions from './HaikuPostActions';
 
 export default function HaikuPost({
@@ -37,7 +38,7 @@ export default function HaikuPost({
           <span>{username}</span>
         </div>
         <span className="text-sm">
-          <time dateTime={created_at.toString()}>{created_at.toString()}</time>
+          <time dateTime={created_at}>{formatRelativeTime(created_at)}</time>
         </span>
       </div>
       <div className="text-lg pt-4 pb-6">

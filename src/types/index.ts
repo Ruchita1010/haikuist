@@ -7,7 +7,7 @@ export type UserProfile = {
 export type HaikuPostType = {
   id: string;
   content: string;
-  created_at: Date;
+  created_at: string;
   profiles: {
     id: string;
     username: string;
@@ -18,7 +18,7 @@ export type HaikuPostType = {
 export type Comment = {
   id: string;
   content: string;
-  created_at: Date;
+  created_at: string;
   profiles: {
     username: string;
     avatar_path: string;
