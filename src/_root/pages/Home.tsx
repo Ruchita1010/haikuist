@@ -4,7 +4,7 @@ import { HaikuPostType } from '../../types';
 import HaikuPost from '../../components/shared/HaikuPost';
 
 export default function Home() {
-  const [haikuPosts, setHaikuPosts] = useState([] as Required<HaikuPostType>[]);
+  const [haikuPosts, setHaikuPosts] = useState([] as HaikuPostType[]);
 
   useEffect(() => {
     const fetchHaikuPosts = async () => {

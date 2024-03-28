@@ -38,7 +38,7 @@ export const getHaikuPosts = () => {
     .from('haikus')
     .select(`id, content, created_at, profiles (id, username, avatar_path)`)
     .order('created_at', { ascending: false })
-    .returns<Required<HaikuPostType>[]>();
+    .returns<HaikuPostType[]>();
 };
 
 export const likeHaikuPost = (haikuId: string, userId: string) => {
@@ -93,7 +93,7 @@ export const getUserHaikuPosts = (userId: string) => {
     .select('id, content, created_at, profiles (id, username, avatar_path)')
     .eq('profile_id', userId)
     .order('created_at', { ascending: false })
-    .returns<Required<HaikuPostType>[]>();
+    .returns<HaikuPostType[]>();
 };
 
 export const getLikedHaikuPosts = (userId: string) => {
@@ -104,7 +104,7 @@ export const getLikedHaikuPosts = (userId: string) => {
     )
     .eq('likes.profile_id', userId)
     .order('created_at', { referencedTable: 'likes', ascending: false })
-    .returns<Required<HaikuPostType>[]>();
+    .returns<HaikuPostType[]>();
 };
 
 export const getSavedHaikuPosts = (userId: string) => {
@@ -115,7 +115,7 @@ export const getSavedHaikuPosts = (userId: string) => {
     )
     .eq('saves.profile_id', userId)
     .order('created_at', { referencedTable: 'saves', ascending: false })
-    .returns<Required<HaikuPostType>[]>();
+    .returns<HaikuPostType[]>();
 };
 
 export const addComment = (

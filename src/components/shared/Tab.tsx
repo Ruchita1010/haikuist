@@ -11,7 +11,7 @@ type TabProps = {
 
 export default function Tab({ tabId, getData }: TabProps) {
   const { session } = useAuth();
-  const [haikuPosts, setHaikuPosts] = useState([] as Required<HaikuPostType>[]);
+  const [haikuPosts, setHaikuPosts] = useState([] as HaikuPostType[]);
 
   useEffect(() => {
     if (!session) {
