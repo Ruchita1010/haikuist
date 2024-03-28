@@ -99,15 +99,21 @@ export default function Profile() {
       <Routes>
         <Route
           index
-          element={<Tab key="haikus" getData={getUserHaikuPosts} />}
+          element={
+            <Tab key="haikus" tabId="haikus" getData={getUserHaikuPosts} />
+          }
         />
         <Route
           path="/likes"
-          element={<Tab key="likes" getData={getLikedHaikuPosts} />}
+          element={
+            <Tab key="likes" tabId="likes" getData={getLikedHaikuPosts} />
+          }
         />
         <Route
           path="/saves"
-          element={<Tab key="saves" getData={getSavedHaikuPosts} />}
+          element={
+            <Tab key="saves" tabId="saves" getData={getSavedHaikuPosts} />
+          }
         />
       </Routes>
     </>

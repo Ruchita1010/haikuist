@@ -5,10 +5,11 @@ import { useAuth } from '../../context/AuthContext';
 import HaikuPost from './HaikuPost';
 
 type TabProps = {
+  tabId: string;
   getData: (id: string) => ReturnType<typeof getUserHaikuPosts>;
 };
 
-export default function Tab({ getData }: TabProps) {
+export default function Tab({ tabId, getData }: TabProps) {
   const { session } = useAuth();
   const [haikuPosts, setHaikuPosts] = useState([] as Required<HaikuPostType>[]);
 
@@ -33,9 +34,9 @@ export default function Tab({ getData }: TabProps) {
 
   return (
     <div
-      id="Haikus"
+      id={`tabpanel-${tabId}`}
       role="tabpanel"
-      aria-labelledby="tab-haikus"
+      aria-labelledby={`tab-${tabId}`}
       tabIndex={0}
       className="flex flex-col gap-4 min-h-screen">
       {haikuPosts.map(({ id, content, created_at, profiles }) => {
