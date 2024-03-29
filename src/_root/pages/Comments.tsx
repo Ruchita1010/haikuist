@@ -63,7 +63,7 @@ export default function Comments() {
                     <span className="font-bold overflow-hidden">
                       {username}
                     </span>
-                    <span>•</span>
+                    <span aria-hidden="true">•</span>
                     <span className="text-sm text-zinc-500 whitespace-nowrap">
                       <time dateTime={created_at}>
                         {formatRelativeTime(created_at)}
