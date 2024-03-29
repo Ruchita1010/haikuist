@@ -60,7 +60,9 @@ export default function Comments() {
                 />
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold">{username}</span>
+                    <span className="font-bold overflow-hidden">
+                      {username}
+                    </span>
                     <span>•</span>
                     <span className="text-sm text-zinc-500">
                       <time dateTime={created_at}>

@@ -26,8 +26,8 @@ export default function HaikuPost({
 
   return (
     <article className="border-b-2 py-3">
-      <div className="flex items-center">
-        <div className="flex flex-1 items-center gap-2">
+      <div className="flex items-center gap-2">
+        <div className="flex flex-1 items-center gap-2 overflow-hidden">
           <img
             src={avatarUrl}
             alt={`${username}'s avatar`}

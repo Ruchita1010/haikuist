@@ -78,9 +78,9 @@ export default function Profile() {
           alt="Avatar"
           className="flex-shrink-0 w-32 h-32 object-cover rounded-full"
         />
-        <div className="flex flex-col justify-around">
+        <div className="flex flex-col justify-around overflow-hidden">
           <div>
-            <p className="text-xl font-bold">{user.username}</p>
+            <p className="text-xl font-bold break-words">{user.username}</p>
             <p className="text-zinc-500">
               Joined {formatMonthYear(user.created_at)}
             </p>

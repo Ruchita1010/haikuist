@@ -31,19 +31,17 @@ export default function Notification({
             alt={`${username}'s avatar`}
             className="flex-shrink-0 w-11 h-11 object-cover rounded-full"
           />
-          <div className="flex gap-1">
-            <span className="font-bold">{username}</span>
-            {type === 'comment' ? (
-              <Link
-                to={`/haiku/${id}`}
-                aria-label="View comments on your post"
-                className="underline">
-                commented on your post
-              </Link>
-            ) : (
-              'liked your post'
-            )}
-          </div>
+          <span className="font-bold overflow-hidden">{username}</span>
+          {type === 'comment' ? (
+            <Link
+              to={`/haiku/${id}`}
+              aria-label="View comments on your post"
+              className="underline">
+              commented on your post
+            </Link>
+          ) : (
+            'liked your post'
+          )}
         </div>
         <div className="text-zinc-400">
           {lines.map((line, index) => (
