@@ -64,7 +64,7 @@ export default function Comments() {
                       {username}
                     </span>
                     <span>•</span>
-                    <span className="text-sm text-zinc-500">
+                    <span className="text-sm text-zinc-500 whitespace-nowrap">
                       <time dateTime={created_at}>
                         {formatRelativeTime(created_at)}
                       </time>

@@ -40,7 +40,7 @@ export default function Notification({
               commented on your post
             </Link>
           ) : (
-            'liked your post'
+            <span className="sm:whitespace-nowrap">liked your post</span>
           )}
         </div>
         <div className="text-zinc-400">
