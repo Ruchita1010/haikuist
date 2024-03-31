@@ -98,23 +98,23 @@ export const getUserHaikuPosts = (userId: string) => {
 
 export const getLikedHaikuPosts = (userId: string) => {
   return supabase
-    .from('haikus')
+    .from('likes')
     .select(
-      'id, content, created_at, profiles(id, username, avatar_path), likes!inner()'
+      '...haikus(id, content, created_at, profiles(id, username, avatar_path))'
     )
-    .eq('likes.profile_id', userId)
-    .order('created_at', { referencedTable: 'likes', ascending: false })
+    .eq('profile_id', userId)
+    .order('created_at', { ascending: false })
     .returns<HaikuPostType[]>();
 };
 
 export const getSavedHaikuPosts = (userId: string) => {
   return supabase
-    .from('haikus')
+    .from('saves')
     .select(
-      'id, content, created_at, profiles(id, username, avatar_path), saves!inner()'
+      '...haikus(id, content, created_at, profiles(id, username, avatar_path))'
     )
-    .eq('saves.profile_id', userId)
-    .order('created_at', { referencedTable: 'saves', ascending: false })
+    .eq('profile_id', userId)
+    .order('created_at', { ascending: false })
     .returns<HaikuPostType[]>();
 };
 
