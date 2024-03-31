@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { PostgrestError } from '@supabase/supabase-js';
 import { HaikuPostType } from '../../types';
 import { getUserHaikuPosts } from '../../lib/supabase/api';
 import { useAuth } from '../../context/AuthContext';
+import Loader from './Loader';
 import HaikuPost from './HaikuPost';
 
 type TabProps = {
@@ -11,26 +13,30 @@ type TabProps = {
 
 export default function Tab({ tabId, getData }: TabProps) {
   const { session } = useAuth();
-  const [haikuPosts, setHaikuPosts] = useState([] as HaikuPostType[]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<PostgrestError | null>(null);
+  const [haikuPosts, setHaikuPosts] = useState<HaikuPostType[]>([]);
 
   useEffect(() => {
-    if (!session) {
-      alert('Please log in!');
-      return;
-    }
-
-    const fetchHaikuPosts = async () => {
-      const { data, error } = await getData(session.user.id);
-
+    (async () => {
+      const { data, error } = await getData(session?.user.id || '');
       if (error) {
-        alert(error.message);
+        setError(error);
+        setLoading(false);
         return;
       }
       setHaikuPosts(data);
-    };
-
-    fetchHaikuPosts();
+      setLoading(false);
+    })();
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <p>Some error occured :/</p>;
+  }
 
   return (
     <div

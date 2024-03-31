@@ -1,28 +1,42 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { PostgrestError } from '@supabase/supabase-js';
 import { getAvatarUrl, getComments } from '../../lib/supabase/api';
 import { Comment } from '../../types';
 import { formatRelativeTime } from '../../utils/dateFormatter';
 import Icon from '../../components/shared/Icon';
+import Loader from '../../components/shared/Loader';
 
 export default function Comments() {
   const { id } = useParams();
-  const [comments, setComments] = useState([] as Comment[]);
+  if (!id) {
+    return;
+  }
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<PostgrestError | null>(null);
+  const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
     (async () => {
-      if (!id) {
-        alert('Invalid');
-        return;
-      }
       const { data, error } = await getComments(id);
       if (error) {
-        alert(error.message);
+        setError(error);
+        setLoading(false);
         return;
       }
       setComments(data);
+      setLoading(false);
     })();
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <p>Some error occured :/</p>;
+  }
 
   return (
     <>

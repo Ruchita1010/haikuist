@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   getAvatarUrl,
   getUserById,
@@ -30,37 +31,33 @@ export default function EditProfile() {
     resolver: zodResolver(profileSchema),
   });
   const { session } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<PostgrestError | null>(null);
   const [avatarUrl, setAvatarUrl] = useState('/assets/default-pfp.svg');
   const [currentProfile, setCurrentProfile] = useState<UserProfile | null>(
     null
   );
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      if (!session) {
-        alert('Please log in to update your profile');
-        return;
-      }
-
-      const { data, error } = await getUserById(session.user.id);
+    (async () => {
+      const { data, error } = await getUserById(session?.user.id || '');
       if (error) {
-        alert(error.message);
+        setError(error);
+        setLoading(false);
         return;
       }
 
       const { username, bio, avatar_path } = data;
       setValue('username', username);
       setValue('bio', bio);
-
       if (avatar_path !== '') {
         const { publicUrl } = getAvatarUrl(avatar_path).data;
         setAvatarUrl(publicUrl);
       }
       setCurrentProfile({ username, bio, avatar_path });
-    };
-
-    fetchUserProfile();
-  }, [session]);
+      setLoading(false);
+    })();
+  }, []);
 
   const isProfileModified = ({ username, bio, avatar }: ProfileSchema) => {
     return (
@@ -72,21 +69,12 @@ export default function EditProfile() {
   };
 
   const onSubmit = async (profileData: ProfileSchema) => {
-    if (!isProfileModified(profileData)) {
-      return;
-    }
-
-    const userId = session?.user.id;
-    if (!userId) {
-      alert('Please log in to update your profile');
+    if (!isProfileModified(profileData) || !session?.user.id) {
       return;
     }
 
     const { username, bio, avatar } = profileData;
-    let updates: UserProfile = {
-      username,
-      bio,
-    };
+    let updates: UserProfile = { username, bio };
 
     if (avatar && avatar.length > 0) {
       const avatarFile = avatar[0];
@@ -100,11 +88,10 @@ export default function EditProfile() {
         alert(uploadError.message);
         return;
       }
-
       updates.avatar_path = filePath;
     }
 
-    const { error } = await updateProfile(updates, userId);
+    const { error } = await updateProfile(updates, session?.user.id);
     if (error) {
       alert(error.message);
       return;
@@ -114,6 +101,14 @@ export default function EditProfile() {
     // To prevent that for now, resetField is used. However, using "resetField" results in the field being set to undefined.
     resetField('avatar');
   };
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <p>Some error occured :/</p>;
+  }
 
   return (
     <div>

@@ -1,39 +1,48 @@
 import { useEffect, useState } from 'react';
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   getNotifications,
   setNotificationsAsRead,
 } from '../../lib/supabase/api';
 import { AppNotification } from '../../types';
 import { useAuth } from '../../context/AuthContext';
+import Loader from '../../components/shared/Loader';
 import Notification from '../../components/shared/Notification';
 
 export default function Notifications() {
   const { session } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<PostgrestError | null>(null);
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
 
   useEffect(() => {
     (async () => {
-      if (!session) {
-        alert('Please login');
-        return;
-      }
-
-      const { data, error } = await getNotifications(session.user.id);
+      const { data, error } = await getNotifications(session?.user.id || '');
       if (error) {
-        alert(error.message);
+        setError(error);
+        setLoading(false);
         return;
       }
       setNotifications(data);
+      setLoading(false);
 
       const { error: updateError } = await setNotificationsAsRead(
-        session.user.id
+        session?.user.id || ''
       );
       if (updateError) {
         alert(updateError.message);
         return;
       }
     })();
-  }, [session]);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <p>Some error occured :/</p>;
+  }
 
   return (
     <section aria-labelledby="accessible-list-2" className="grid">

@@ -1,25 +1,35 @@
 import { useEffect, useState } from 'react';
+import { PostgrestError } from '@supabase/supabase-js';
 import { getHaikuPosts } from '../../lib/supabase/api';
 import { HaikuPostType } from '../../types';
+import Loader from '../../components/shared/Loader';
 import HaikuPost from '../../components/shared/HaikuPost';
 
 export default function Home() {
-  const [haikuPosts, setHaikuPosts] = useState([] as HaikuPostType[]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<PostgrestError | null>(null);
+  const [haikuPosts, setHaikuPosts] = useState<HaikuPostType[]>([]);
 
   useEffect(() => {
-    const fetchHaikuPosts = async () => {
+    (async () => {
       const { data, error } = await getHaikuPosts();
-
       if (error) {
-        // set error and display error screen
-        alert(error.message);
+        setError(error);
+        setLoading(false);
         return;
       }
       setHaikuPosts(data);
-    };
-
-    fetchHaikuPosts();
+      setLoading(false);
+    })();
   }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <p>Some error occured :/</p>;
+  }
 
   return (
     <section

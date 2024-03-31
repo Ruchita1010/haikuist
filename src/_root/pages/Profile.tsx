@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { PostgrestError } from '@supabase/supabase-js';
 import {
   getAvatarUrl,
   getUserById,
@@ -10,26 +11,28 @@ import {
 } from '../../lib/supabase/api';
 import { useAuth } from '../../context/AuthContext';
 import { formatMonthYear } from '../../utils/dateFormatter';
+import Loader from '../../components/shared/Loader';
 import TabList from '../../components/shared/Tablist';
 import Tab from '../../components/shared/Tab';
 
 export default function Profile() {
-  const initialUser = { username: '', bio: '', avatarUrl: '', created_at: '' };
-  const [user, setUser] = useState(initialUser);
-
   const { session } = useAuth();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<PostgrestError | null>(null);
+  const [user, setUser] = useState({
+    username: '',
+    bio: '',
+    avatarUrl: '',
+    created_at: '',
+  });
 
   useEffect(() => {
-    if (!session) {
-      alert('Please log in!');
-      return;
-    }
-
-    const getProfile = async () => {
-      const { data, error } = await getUserById(session.user.id);
+    (async () => {
+      const { data, error } = await getUserById(session?.user.id || '');
       if (error) {
-        alert(error.message);
+        setError(error);
+        setLoading(false);
         return;
       }
 
@@ -39,10 +42,9 @@ export default function Profile() {
         : '/assets/default-pfp.svg';
 
       setUser({ username, bio, avatarUrl, created_at });
-    };
-
-    getProfile();
-  }, [session]);
+      setLoading(false);
+    })();
+  }, []);
 
   const handleSignOut = async () => {
     const { error } = await signOutUser();
@@ -58,6 +60,14 @@ export default function Profile() {
     { id: 'likes', path: '/profile/likes', label: 'Likes' },
     { id: 'saves', path: '/profile/saves', label: 'Saves' },
   ];
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <p>Some error occured :/</p>;
+  }
 
   return (
     <section aria-labelledby="accessible-list-4">
