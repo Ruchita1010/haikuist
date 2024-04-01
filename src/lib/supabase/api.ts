@@ -18,7 +18,11 @@ export const signOutUser = () => {
 };
 
 export const getUserById = (userId: string) => {
-  return supabase.from('profiles').select('*').eq('id', userId).single();
+  return supabase
+    .from('profiles')
+    .select('username, bio, avatar_path, created_at')
+    .eq('id', userId)
+    .single();
 };
 
 export const updateProfile = (updates: UserProfile, userId: string) => {

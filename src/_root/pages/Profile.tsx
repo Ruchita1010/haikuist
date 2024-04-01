@@ -36,12 +36,11 @@ export default function Profile() {
         return;
       }
 
-      const { username, bio, avatar_path, created_at } = data;
+      const { avatar_path, ...userData } = data;
       const avatarUrl = avatar_path
         ? getAvatarUrl(avatar_path).data.publicUrl
         : '/assets/default-pfp.svg';
-
-      setUser({ username, bio, avatarUrl, created_at });
+      setUser({ ...userData, avatarUrl });
       setLoading(false);
     })();
   }, []);
