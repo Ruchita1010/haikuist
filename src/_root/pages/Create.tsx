@@ -18,12 +18,10 @@ export default function Create() {
   const { session } = useAuth();
 
   const onSubmit = async (newHaiku: HaikuSchema) => {
-    if (!session) {
-      alert('Please login!');
-      return;
-    }
-
-    const { error } = await createHaikuPosts(session.user.id, newHaiku.haiku);
+    const { error } = await createHaikuPosts(
+      session?.user.id || '',
+      newHaiku.haiku
+    );
     if (error) {
       // set toast message
       alert(error.message);

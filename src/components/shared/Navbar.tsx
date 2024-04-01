@@ -12,13 +12,7 @@ export default function Navbar() {
   const { session } = useAuth();
   const [notificationCount, setNotificationCount] = useState(0);
 
-  if (!session) {
-    alert('Please login!');
-    return;
-  }
-
-  const userId = session.user.id;
-
+  const userId = session?.user.id || '';
   useEffect(() => {
     const channel = supabase
       .channel(`notification_count_${userId}`)
@@ -39,7 +33,7 @@ export default function Navbar() {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [userId]);
+  }, []);
 
   useEffect(() => {
     (async () => {

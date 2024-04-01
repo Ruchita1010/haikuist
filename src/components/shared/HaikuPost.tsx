@@ -11,17 +11,10 @@ export default function HaikuPost({
   profile,
 }: HaikuPostType) {
   const { session } = useAuth();
-  if (!session) {
-    alert('Please log in!');
-    return;
-  }
-
   const { username, avatar_path } = profile;
-
   const avatarUrl = avatar_path
     ? getAvatarUrl(avatar_path).data.publicUrl
     : '/assets/default-pfp.svg';
-
   const lines = content.split('\n');
 
   return (
@@ -46,7 +39,7 @@ export default function HaikuPost({
           </p>
         ))}
       </div>
-      <HaikuPostActions haikuId={id} userId={session.user.id} />
+      <HaikuPostActions haikuId={id} userId={session?.user.id || ''} />
     </article>
   );
 }
