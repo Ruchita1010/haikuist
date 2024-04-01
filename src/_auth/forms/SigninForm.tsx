@@ -88,7 +88,9 @@ export default function SigninForm() {
             <span>or</span>
             <div className="w-full border-t border-zinc-300"></div>
           </div>
-          <button className="px-4 py-2 bg-sky-200 outline-4 outline-sky-300 rounded-md">
+          <button
+            type="button"
+            className="px-4 py-2 bg-sky-200 outline-4 outline-sky-300 rounded-md">
             Continue with Google
           </button>
         </div>
