@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { PostgrestError } from '@supabase/supabase-js';
 import { getAvatarUrl, getComments } from '../../lib/supabase/api';
 import { Comment } from '../../types';
@@ -13,6 +13,7 @@ export default function Comments() {
     return;
   }
 
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<PostgrestError | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
@@ -41,12 +42,9 @@ export default function Comments() {
   return (
     <>
       <div className="flex items-center gap-6 mb-4">
-        <Link to="/home" aria-label="Back">
-          <Icon
-            id="icon-back"
-            className="w-6 h-6 fill-none stroke-current cursor-pointer"
-          />
-        </Link>
+        <button type="button" aria-label="Back" onClick={() => navigate(-1)}>
+          <Icon id="icon-back" className="w-6 h-6 fill-none stroke-current" />
+        </button>
         <h2 className="text-xl">Comments</h2>
       </div>
       {comments.length === 0 ? (
