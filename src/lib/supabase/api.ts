@@ -36,7 +36,9 @@ export const createHaikuPosts = (userId: string, haiku: string) => {
 export const getHaikuPosts = () => {
   return supabase
     .from('haikus')
-    .select(`id, content, created_at, profiles (id, username, avatar_path)`)
+    .select(
+      `id, content, created_at, profile:profiles(id, username, avatar_path)`
+    )
     .order('created_at', { ascending: false })
     .returns<HaikuPostType[]>();
 };
@@ -90,7 +92,9 @@ export const checkIsSaved = (haikuId: string, userId: string) => {
 export const getUserHaikuPosts = (userId: string) => {
   return supabase
     .from('haikus')
-    .select('id, content, created_at, profiles (id, username, avatar_path)')
+    .select(
+      'id, content, created_at, profile:profiles(id, username, avatar_path)'
+    )
     .eq('profile_id', userId)
     .order('created_at', { ascending: false })
     .returns<HaikuPostType[]>();
@@ -100,7 +104,7 @@ export const getLikedHaikuPosts = (userId: string) => {
   return supabase
     .from('likes')
     .select(
-      '...haikus(id, content, created_at, profiles(id, username, avatar_path))'
+      '...haikus(id, content, created_at, profile:profiles(id, username, avatar_path))'
     )
     .eq('profile_id', userId)
     .order('created_at', { ascending: false })
@@ -111,7 +115,7 @@ export const getSavedHaikuPosts = (userId: string) => {
   return supabase
     .from('saves')
     .select(
-      '...haikus(id, content, created_at, profiles(id, username, avatar_path))'
+      '...haikus(id, content, created_at, profile:profiles(id, username, avatar_path))'
     )
     .eq('profile_id', userId)
     .order('created_at', { ascending: false })
@@ -131,7 +135,7 @@ export const addComment = (
 export const getComments = (haikuId: string) => {
   return supabase
     .from('comments')
-    .select('id, content, created_at, profiles(username, avatar_path)')
+    .select('id, content, created_at, profile:profiles(username, avatar_path)')
     .eq('haiku_id', haikuId)
     .returns<Comment[]>();
 };

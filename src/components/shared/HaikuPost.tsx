@@ -8,7 +8,7 @@ export default function HaikuPost({
   id,
   content,
   created_at,
-  profiles,
+  profile,
 }: HaikuPostType) {
   const { session } = useAuth();
   if (!session) {
@@ -16,7 +16,7 @@ export default function HaikuPost({
     return;
   }
 
-  const { username, avatar_path } = profiles;
+  const { username, avatar_path } = profile;
 
   const avatarUrl = avatar_path
     ? getAvatarUrl(avatar_path).data.publicUrl

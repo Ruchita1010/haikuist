@@ -38,14 +38,14 @@ export default function Home() {
       <h1 id="accessible-list-1" className="sr-only">
         Home
       </h1>
-      {haikuPosts.map(({ id, content, created_at, profiles }) => {
+      {haikuPosts.map(({ id, content, created_at, profile }) => {
         return (
           <HaikuPost
             key={id}
             id={id}
             content={content}
             created_at={created_at}
-            profiles={profiles}
+            profile={profile}
           />
         );
       })}

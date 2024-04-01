@@ -53,12 +53,7 @@ export default function Comments() {
         <p className="px-2 py-4">No comments yet</p>
       ) : (
         comments.map(
-          ({
-            id,
-            content,
-            created_at,
-            profiles: { username, avatar_path },
-          }) => {
+          ({ id, content, created_at, profile: { username, avatar_path } }) => {
             return (
               <article
                 key={id}
