@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { PostgrestError } from '@supabase/supabase-js';
 import {
   getAvatarUrl,
@@ -7,17 +7,16 @@ import {
   getUserHaikuPosts,
   getLikedHaikuPosts,
   getSavedHaikuPosts,
-  signOutUser,
 } from '../../lib/supabase/api';
 import { useAuth } from '../../context/AuthContext';
 import { formatMonthYear } from '../../utils/dateFormatter';
 import Loader from '../../components/shared/Loader';
 import TabList from '../../components/shared/Tablist';
 import Tab from '../../components/shared/Tab';
+import SettingsMenu from './SettingsMenu';
 
 export default function Profile() {
   const { session } = useAuth();
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<PostgrestError | null>(null);
   const [user, setUser] = useState({
@@ -45,15 +44,6 @@ export default function Profile() {
     })();
   }, []);
 
-  const handleSignOut = async () => {
-    const { error } = await signOutUser();
-    if (error) {
-      alert(error.message);
-      return;
-    }
-    navigate('/signin', { replace: true });
-  };
-
   const tabs = [
     { id: 'haikus', path: '/profile', label: 'Haikus' },
     { id: 'likes', path: '/profile/likes', label: 'Likes' },
@@ -73,15 +63,8 @@ export default function Profile() {
       <h1 id="accessible-list-4" className="sr-only">
         Profile
       </h1>
-      <div className="grid justify-items-end p-4 mb-4">
-        <button
-          type="button"
-          onClick={handleSignOut}
-          className="min-w-28 px-4 py-2 bg-sky-300 outline-4 outline-sky-500 rounded-md">
-          Sign out
-        </button>
-      </div>
-      <div className="flex flex-col md:flex-row gap-4 mb-2">
+      <SettingsMenu />
+      <div className="flex flex-col md:flex-row gap-4 py-8 mb-8">
         <img
           src={user.avatarUrl}
           alt="Avatar"
@@ -96,13 +79,6 @@ export default function Profile() {
           </div>
           <p className="mt-2">{user.bio}</p>
         </div>
-      </div>
-      <div className="grid justify-items-end p-4">
-        <Link
-          to="/edit-profile"
-          className="px-4 py-2 text-center border border-zinc-400 outline-4 outline-zinc-500 rounded-md">
-          Edit Profile
-        </Link>
       </div>
       <TabList tabs={tabs} />
 
