@@ -13,7 +13,7 @@ import { formatMonthYear } from '../../utils/dateFormatter';
 import Loader from '../../components/shared/Loader';
 import TabList from '../../components/shared/Tablist';
 import Tab from '../../components/shared/Tab';
-import SettingsMenu from './SettingsMenu';
+import Settings from './Settings';
 
 export default function Profile() {
   const { session } = useAuth();
@@ -63,7 +63,7 @@ export default function Profile() {
       <h1 id="accessible-list-4" className="sr-only">
         Profile
       </h1>
-      <SettingsMenu />
+      <Settings />
       <div className="flex flex-col md:flex-row gap-4 py-8 mb-8">
         <img
           src={user.avatarUrl}
