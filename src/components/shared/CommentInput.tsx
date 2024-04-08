@@ -38,6 +38,7 @@ export default function CommentInput({ haikuId, userId }: CommentInputProps) {
         <textarea
           id="comment"
           rows={1}
+          autoFocus
           aria-label="Add a comment..."
           placeholder="Add a comment..."
           className="resize-none w-full px-1 bg-transparent outline-none focus:ring-1 ring-fgColor/50"
