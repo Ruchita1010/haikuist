@@ -53,7 +53,7 @@ export default function CommentInput({ haikuId, userId }: CommentInputProps) {
         )}
       </div>
       {errors.comment && (
-        <p className="text-sm text-red-700">{`${errors.comment.message}`}</p>
+        <p className="text-sm text-errColor">{`${errors.comment.message}`}</p>
       )}
     </form>
   );

@@ -64,7 +64,7 @@ export default function AvatarUpload({
         Update Avatar
       </button>
       {errors.avatar && (
-        <p className="text-sm text-red-700">{`${errors.avatar.message}`}</p>
+        <p className="text-sm text-errColor">{`${errors.avatar.message}`}</p>
       )}
     </div>
   );

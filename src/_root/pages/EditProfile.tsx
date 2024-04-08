@@ -136,7 +136,7 @@ export default function EditProfile() {
             {...register('username')}
           />
           {errors.username && (
-            <p className="text-sm text-red-700">{`${errors.username.message}`}</p>
+            <p className="text-sm text-errColor">{`${errors.username.message}`}</p>
           )}
         </div>
         <div className="mb-4">
@@ -149,7 +149,7 @@ export default function EditProfile() {
             className="resize-none w-full px-4 py-2 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
             {...register('bio')}></textarea>
           {errors.bio && (
-            <p className="text-sm text-red-700">{`${errors.bio.message}`}</p>
+            <p className="text-sm text-errColor">{`${errors.bio.message}`}</p>
           )}
         </div>
         <div className="grid justify-items-end">

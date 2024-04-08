@@ -17,7 +17,7 @@ export default function Notification({
       <Icon
         id={`icon-${type}`}
         className={`h-8 w-8 ${
-          type === 'like' ? 'fill-red-500' : 'fill-sky-500'
+          type === 'like' ? 'fill-likeColor' : 'fill-commentColor'
         }`}
       />
       <div className="flex flex-col gap-2">

@@ -12,10 +12,18 @@
   .dark {
     --color-background: 0deg 0% 15%;
     --color-foreground: 31deg 100% 96%;
+    --color-like: 271deg 51% 68%;
+    --color-comment: 149deg 43% 49%;
+    --color-save: 219deg 79% 66%;
+    --color-error: 6deg 73% 76%;
   }
 
   .light {
     --color-background: 31deg 100% 96%;
     --color-foreground: 0deg 0% 15%;
+    --color-like: 273deg 22% 36%;
+    --color-comment: 150deg 41% 38%;
+    --color-save: 219deg 39% 48%;
+    --color-error: 6deg 94% 34%;
   }
 }

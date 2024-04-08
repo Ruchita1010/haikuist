@@ -44,16 +44,18 @@ export default function Create() {
         </div>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="grid">
-            <textarea
-              id="haiku"
-              rows={4}
-              aria-label="write your haiku"
-              placeholder="old pond&#10;frog leaps in&#10;water's sound"
-              className="resize-none w-full p-4 mb-10 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
-              {...register('haiku')}></textarea>
-            {errors.haiku && (
-              <p className="text-sm text-red-700">{`${errors.haiku.message}`}</p>
-            )}
+            <div className="mb-10">
+              <textarea
+                id="haiku"
+                rows={4}
+                aria-label="write your haiku"
+                placeholder="old pond&#10;frog leaps in&#10;water's sound"
+                className="resize-none w-full p-4 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
+                {...register('haiku')}></textarea>
+              {errors.haiku && (
+                <p className="text-errColor">{`${errors.haiku.message}`}</p>
+              )}
+            </div>
             <button
               type="submit"
               className="min-w-32 justify-self-end px-4 py-2 bg-fgColor text-bgColor font-medium rounded-md">

@@ -71,9 +71,9 @@ export default function HaikuPostActions({
           <button type="button" onClick={() => handleLike(haikuId, userId)}>
             <Icon
               id="icon-like"
-              className={`w-6 h-6 ${
-                hasLiked ? 'fill-current text-red-600' : 'fill-none'
-              } stroke-current cursor-pointer`}
+              className={`w-6 h-6 stroke-current ${
+                hasLiked ? 'fill-current text-likeColor' : 'fill-none'
+              }`}
             />
           </button>
           <button
@@ -81,7 +81,11 @@ export default function HaikuPostActions({
             onClick={() => setCommentInputVisible(!commentInputVisible)}>
             <Icon
               id="icon-comment"
-              className="w-6 h-6 fill-none stroke-current cursor-pointer"
+              className={`w-6 h-6 stroke-current ${
+                commentInputVisible
+                  ? 'fill-current text-commentColor'
+                  : 'fill-none'
+              }`}
             />
           </button>
           <Link
@@ -93,9 +97,9 @@ export default function HaikuPostActions({
         <button type="button" onClick={() => handleSave(haikuId, userId)}>
           <Icon
             id="icon-save"
-            className={`w-6 h-6 ${
-              hasSaved ? 'fill-current text-sky-400' : 'fill-none'
-            } stroke-current cursor-pointer`}
+            className={`w-6 h-6 stroke-current ${
+              hasSaved ? 'fill-current text-saveColor' : 'fill-none'
+            }`}
           />
         </button>
       </div>
