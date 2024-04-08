@@ -113,7 +113,10 @@ export default function EditProfile() {
   return (
     <div>
       <h1 className="sr-only">Edit Profile</h1>
-      <Link to="/profile" aria-label="Back to Profile">
+      <Link
+        to="/profile"
+        aria-label="Back to Profile"
+        className="inline-block p-1 hover:bg-fgColor/10 rounded-full">
         <Icon
           id="icon-back"
           className="w-6 h-6 fill-none stroke-current cursor-pointer"
