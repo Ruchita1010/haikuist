@@ -7,3 +7,15 @@
     @apply box-border list-none p-0 m-0;
   }
 }
+
+@layer components {
+  .dark {
+    --color-background: 0deg 0% 15%;
+    --color-foreground: 31deg 100% 96%;
+  }
+
+  .light {
+    --color-background: 31deg 100% 96%;
+    --color-foreground: 0deg 0% 15%;
+  }
+}

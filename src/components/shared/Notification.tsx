@@ -13,7 +13,7 @@ export default function Notification({
   const lines = content.split('\n');
 
   return (
-    <article className="grid grid-cols-[auto,minmax(0,1fr)] gap-3 py-3 border-b-2">
+    <article className="grid grid-cols-[auto,minmax(0,1fr)] gap-3 py-3 border-b border-fgColor/15">
       <Icon
         id={`icon-${type}`}
         className={`h-8 w-8 ${
@@ -43,7 +43,7 @@ export default function Notification({
             <span className="sm:whitespace-nowrap">liked your post</span>
           )}
         </div>
-        <div className="text-zinc-400">
+        <div className="text-fgColor/60">
           {lines.map((line, index) => (
             <p key={index} className="break-words">
               {line}

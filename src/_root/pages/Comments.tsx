@@ -70,8 +70,12 @@ export default function Comments() {
                     <span className="font-bold overflow-hidden">
                       {username}
                     </span>
-                    <span aria-hidden="true">•</span>
-                    <span className="text-sm text-zinc-500 whitespace-nowrap">
+                    <span
+                      aria-hidden="true"
+                      className="text-sm text-fgColor/60">
+                      •
+                    </span>
+                    <span className="text-sm text-fgColor/60 whitespace-nowrap">
                       <time dateTime={created_at}>
                         {formatRelativeTime(created_at)}
                       </time>

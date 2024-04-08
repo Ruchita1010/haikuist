@@ -73,7 +73,7 @@ export default function Profile() {
         <div className="flex flex-col justify-around overflow-hidden">
           <div>
             <p className="text-xl font-bold break-words">{user.username}</p>
-            <p className="text-zinc-500">
+            <p className="text-fgColor/70">
               Joined {formatMonthYear(user.created_at)}
             </p>
           </div>

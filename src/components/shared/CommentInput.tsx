@@ -40,15 +40,15 @@ export default function CommentInput({ haikuId, userId }: CommentInputProps) {
           rows={1}
           aria-label="Add a comment..."
           placeholder="Add a comment..."
-          className="resize-none w-full px-1 bg-transparent focus:outline-dashed"
+          className="resize-none w-full px-1 bg-transparent outline-none focus:ring-1 ring-fgColor/50"
           onInput={handleInput}
           {...register('comment')}></textarea>
         {isValid && (
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-4 py-1 bg-sky-200 outline-4 outline-sky-500 rounded-md">
-            <span>Post</span>
+            className="px-4 py-1 bg-fgColor text-bgColor rounded-md">
+            Post
           </button>
         )}
       </div>

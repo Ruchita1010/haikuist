@@ -86,7 +86,7 @@ export default function HaikuPostActions({
           </button>
           <Link
             to={`/haiku/${haikuId}`}
-            className="text-sm text-zinc-500 underline">
+            className="text-sm text-fgColor/60 underline">
             View comments
           </Link>
         </div>

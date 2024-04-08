@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { useTheme } from './context/ThemeContext';
 import AuthLayout from './_auth/AuthLayout';
 import SigninForm from './_auth/forms/SigninForm';
 import SignupForm from './_auth/forms/SignupForm';
@@ -14,8 +15,10 @@ import {
 import './globals.css';
 
 function App() {
+  const { theme } = useTheme();
+
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-950">
+    <div className={`min-h-screen ${theme === 'dark' ? 'dark' : 'light'}`}>
       <Routes>
         {/* public routes */}
         <Route element={<AuthLayout />}>

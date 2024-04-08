@@ -63,7 +63,7 @@ export default function Navbar() {
           <div key={navItem} className="group md:w-full">
             <NavLink
               to={`/${navItem}`}
-              className="flex items-center md:max-lg:justify-center gap-2 px-2 py-4 rounded md:group-hover:bg-sky-100"
+              className="flex items-center md:max-lg:justify-center gap-2 px-2 py-4 rounded md:group-hover:bg-fgColor/10"
               {...(isItemNotifications && { onClick: resetNotificationCount })}>
               <div className={isItemNotifications ? 'relative' : ''}>
                 <Icon
@@ -73,7 +73,7 @@ export default function Navbar() {
                   }`}
                 />
                 {displayBadge && (
-                  <span className="absolute -top-1 right-0 min-w-4 h-4 flex justify-center items-center text-xs px-0.5 rounded-full bg-sky-300">
+                  <span className="absolute -top-1 right-0 min-w-4 h-4 flex justify-center items-center px-0.5 bg-fgColor text-bgColor text-xs rounded-full">
                     {notificationCount}
                   </span>
                 )}

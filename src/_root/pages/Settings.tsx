@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signOutUser } from '../../lib/supabase/api';
+import { useTheme } from '../../context/ThemeContext';
 import Icon from '../../components/shared/Icon';
 
 export default function Settings() {
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
   const menuRef = useRef<HTMLDivElement>(null);
   const firstElementRef = useRef<HTMLAnchorElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -63,21 +65,22 @@ export default function Settings() {
       {menuOpen ? (
         <div
           id="settings-menu"
-          className="w-48 absolute top-8 right-1 p-2 bg-[#262626] border-2 border-[#3d3d3d] rounded-md">
+          className="w-48 absolute top-8 right-1 p-2 bg-bgColor border-2 border-fgColor/15 rounded-md">
           <Link
             to="/edit-profile"
-            className="block px-4 py-3 rounded-md hover:bg-[#3d3d3d]"
+            className="block px-4 py-3 rounded-md hover:bg-fgColor/10"
             ref={firstElementRef}>
             Edit Profile
           </Link>
           <button
             type="button"
-            className="w-full px-4 py-3 text-left rounded-md hover:bg-[#3d3d3d]">
-            Light Mode
+            className="w-full px-4 py-3 text-left rounded-md hover:bg-fgColor/10"
+            onClick={toggleTheme}>
+            {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
           </button>
           <button
             type="button"
-            className="w-full px-4 py-3 text-left rounded-md hover:bg-[#3d3d3d]"
+            className="w-full px-4 py-3 text-left rounded-md hover:bg-fgColor/10"
             onClick={handleSignOut}>
             Sign out
           </button>

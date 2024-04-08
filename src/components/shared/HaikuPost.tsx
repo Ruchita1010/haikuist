@@ -18,7 +18,7 @@ export default function HaikuPost({
   const lines = content.split('\n');
 
   return (
-    <article className="border-b-2 py-3">
+    <article className="py-3 border-b border-fgColor/15">
       <div className="flex items-center gap-2">
         <div className="flex flex-1 items-center gap-2 overflow-hidden">
           <img
@@ -28,7 +28,7 @@ export default function HaikuPost({
           />
           <span>{username}</span>
         </div>
-        <span className="text-sm">
+        <span className="text-sm text-fgColor/70">
           <time dateTime={created_at}>{formatRelativeTime(created_at)}</time>
         </span>
       </div>

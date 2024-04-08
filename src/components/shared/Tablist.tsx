@@ -57,11 +57,14 @@ export default function TabList({ tabs }: TabListProps) {
 
   return (
     <div
-      className="flex justify-around p-4 mt-2 border-b-2"
+      className="flex justify-around border-b-2 border-fgColor/15"
       role="tablist"
       onKeyDown={handleKeyDown}>
       {tabs.map((tab, index) => (
-        <div role="presentation" key={tab.id}>
+        <div
+          role="presentation"
+          key={tab.id}
+          className="p-4 text-fgColor font-medium hover:bg-fgColor/10">
           <Link
             to={tab.path}
             role="tab"

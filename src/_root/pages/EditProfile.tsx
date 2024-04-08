@@ -132,7 +132,7 @@ export default function EditProfile() {
           <input
             type="text"
             id="username"
-            className="w-full px-4 py-2 border border-zinc-300 outline-1 outline-zinc-400 rounded-md"
+            className="w-full px-4 py-2 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
             {...register('username')}
           />
           {errors.username && (
@@ -146,7 +146,7 @@ export default function EditProfile() {
           <textarea
             id="bio"
             rows={3}
-            className="resize-none w-full px-4 py-2 border border-zinc-300 outline-1 outline-zinc-400 rounded-md"
+            className="resize-none w-full px-4 py-2 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
             {...register('bio')}></textarea>
           {errors.bio && (
             <p className="text-sm text-red-700">{`${errors.bio.message}`}</p>
@@ -155,7 +155,7 @@ export default function EditProfile() {
         <div className="grid justify-items-end">
           <button
             type="submit"
-            className="flex justify-center gap-2 px-6 py-2 bg-sky-300 outline-4 outline-sky-500 rounded-md"
+            className="flex justify-center gap-2 px-6 py-2 bg-fgColor text-bgColor font-medium rounded-md"
             disabled={isSubmitting}>
             {isSubmitting && <Loader />}
             Save
