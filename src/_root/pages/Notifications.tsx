@@ -45,7 +45,7 @@ export default function Notifications() {
   }
 
   return (
-    <section aria-labelledby="accessible-list-2" className="grid">
+    <section aria-labelledby="accessible-list-2">
       <h1 id="accessible-list-2" className="sr-only">
         Notifications
       </h1>
