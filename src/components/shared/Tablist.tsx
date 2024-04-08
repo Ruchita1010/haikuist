@@ -60,27 +60,32 @@ export default function TabList({ tabs }: TabListProps) {
       className="flex justify-around border-b-2 border-fgColor/15"
       role="tablist"
       onKeyDown={handleKeyDown}>
-      {tabs.map((tab, index) => (
-        <div
-          role="presentation"
-          key={tab.id}
-          className="p-4 text-fgColor font-medium hover:bg-fgColor/10">
+      {tabs.map((tab, index) => {
+        const activeTab = pathname === tab.path;
+        return (
           <Link
+            key={tab.id}
             to={tab.path}
             role="tab"
             id={`tab-${tab.id}`}
-            aria-selected={pathname === tab.path ? 'true' : 'false'}
+            aria-selected={activeTab ? 'true' : 'false'}
             aria-controls={`tabpanel-${tab.id}`}
-            tabIndex={pathname === tab.path ? 0 : -1}
+            tabIndex={activeTab ? 0 : -1}
+            className="flex-1 py-4 text-fgColor text-center font-medium hover:bg-fgColor/10"
             ref={(element) => {
               if (element) {
                 tabRefs.current[index] = element;
               }
             }}>
-            {tab.label}
+            <span
+              className={`py-4 ${
+                activeTab ? 'border-b-2 border-fgColor' : ''
+              }`}>
+              {tab.label}
+            </span>
           </Link>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
