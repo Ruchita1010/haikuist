@@ -82,6 +82,8 @@ export default function HaikuPostActions({
           <button
             type="button"
             aria-label="Comment"
+            aria-expanded={commentInputVisible}
+            aria-controls={`commentInput_${haikuId}`}
             onClick={() => setCommentInputVisible(!commentInputVisible)}>
             <Icon
               id="icon-comment"
@@ -111,7 +113,11 @@ export default function HaikuPostActions({
         </button>
       </div>
       {commentInputVisible && (
-        <CommentInput haikuId={haikuId} userId={userId} />
+        <CommentInput
+          haikuId={haikuId}
+          userId={userId}
+          setCommentInputVisible={setCommentInputVisible}
+        />
       )}
     </>
   );

@@ -6,13 +6,18 @@ import { addComment } from '../../lib/supabase/api';
 type CommentInputProps = {
   haikuId: string;
   userId: string;
+  setCommentInputVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function CommentInput({ haikuId, userId }: CommentInputProps) {
+export default function CommentInput({
+  haikuId,
+  userId,
+  setCommentInputVisible,
+}: CommentInputProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm<CommentSchema>({
     resolver: zodResolver(commentSchema),
@@ -21,6 +26,12 @@ export default function CommentInput({ haikuId, userId }: CommentInputProps) {
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.target.style.height = 'inherit';
     e.target.style.height = `${Math.min(e.target.scrollHeight, 80)}px`;
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === 'Escape') {
+      setCommentInputVisible(false);
+    }
   };
 
   const onSubmit = async (formData: CommentSchema) => {
@@ -33,7 +44,12 @@ export default function CommentInput({ haikuId, userId }: CommentInputProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="mt-4 mb-2">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+      onKeyDown={handleKeyDown}
+      id={`commentInput_${haikuId}`}
+      className="mt-4 mb-2">
       <div className="flex items-center gap-2">
         <textarea
           id="comment"
@@ -44,14 +60,12 @@ export default function CommentInput({ haikuId, userId }: CommentInputProps) {
           className="resize-none w-full px-1 bg-transparent outline-none focus:ring-1 ring-fgColor/50"
           onInput={handleInput}
           {...register('comment')}></textarea>
-        {isValid && (
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="px-4 py-1 bg-fgColor text-bgColor rounded-md">
-            Post
-          </button>
-        )}
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="px-4 py-0.5 bg-fgColor text-bgColor rounded-md">
+          Add
+        </button>
       </div>
       {errors.comment && (
         <p className="text-sm text-errColor">{`${errors.comment.message}`}</p>
