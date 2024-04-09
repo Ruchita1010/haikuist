@@ -6,6 +6,14 @@
   * {
     @apply box-border list-none p-0 m-0;
   }
+
+  a,
+  input,
+  button,
+  textarea,
+  [role='tabpanel'] {
+    @apply focus-visible:outline-none focus-visible:outline-fgColor;
+  }
 }
 
 @layer components {
