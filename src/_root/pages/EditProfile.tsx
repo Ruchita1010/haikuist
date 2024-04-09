@@ -158,7 +158,7 @@ export default function EditProfile() {
         <div className="grid justify-items-end">
           <button
             type="submit"
-            className="flex justify-center gap-2 px-6 py-2 bg-fgColor text-bgColor font-medium rounded-md"
+            className="flex justify-center gap-2 px-6 py-2 bg-fgColor text-bgColor font-medium rounded-md hover:bg-fgColor/80"
             disabled={isSubmitting}>
             {isSubmitting && <Loader />}
             Save

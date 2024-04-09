@@ -60,7 +60,7 @@ export default function AvatarUpload({
       <button
         type="button"
         onClick={() => fileInputRef.current?.click()}
-        className="text-center p-2 border border-fgColor/50 rounded-md">
+        className="text-center p-2 border border-fgColor/50 rounded-md hover:bg-fgColor/10">
         Update Avatar
       </button>
       {errors.avatar && (

@@ -63,7 +63,7 @@ export default function CommentInput({
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-4 py-0.5 bg-fgColor text-bgColor rounded-md">
+          className="px-4 py-1 bg-fgColor text-bgColor rounded-md hover:bg-fgColor/80">
           Add
         </button>
       </div>

@@ -45,7 +45,7 @@ export default function Comments() {
         <button
           type="button"
           aria-label="Back"
-          className="p-1 hover:bg-fgColor/10 rounded-full"
+          className="p-1 rounded-full hover:bg-fgColor/10"
           onClick={() => navigate(-1)}>
           <Icon id="icon-back" className="w-6 h-6 fill-none stroke-current" />
         </button>

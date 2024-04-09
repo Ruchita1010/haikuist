@@ -71,6 +71,7 @@ export default function HaikuPostActions({
           <button
             type="button"
             aria-label="Like"
+            className="hover:scale-110"
             onClick={() => handleLike(haikuId, userId)}>
             <Icon
               id="icon-like"
@@ -84,6 +85,7 @@ export default function HaikuPostActions({
             aria-label="Comment"
             aria-expanded={commentInputVisible}
             aria-controls={`commentInput_${haikuId}`}
+            className="hover:scale-110"
             onClick={() => setCommentInputVisible(!commentInputVisible)}>
             <Icon
               id="icon-comment"
@@ -103,6 +105,7 @@ export default function HaikuPostActions({
         <button
           type="button"
           aria-label="Save"
+          className="hover:scale-110"
           onClick={() => handleSave(haikuId, userId)}>
           <Icon
             id="icon-save"
