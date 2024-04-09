@@ -69,7 +69,7 @@ export default function Navbar() {
                 <Icon
                   id={`icon-${navItem}`}
                   className={`h-7 w-7 fill-none stroke-current group-hover:scale-110 ${
-                    isActive && 'fill-sky-200'
+                    isActive ? 'fill-fgColor/55' : ''
                   }`}
                 />
                 {displayBadge && (
