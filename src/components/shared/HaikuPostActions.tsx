@@ -68,7 +68,10 @@ export default function HaikuPostActions({
     <>
       <div className="flex justify-between">
         <div className="flex gap-5 items-center">
-          <button type="button" onClick={() => handleLike(haikuId, userId)}>
+          <button
+            type="button"
+            aria-label="Like"
+            onClick={() => handleLike(haikuId, userId)}>
             <Icon
               id="icon-like"
               className={`w-6 h-6 stroke-current ${
@@ -78,6 +81,7 @@ export default function HaikuPostActions({
           </button>
           <button
             type="button"
+            aria-label="Comment"
             onClick={() => setCommentInputVisible(!commentInputVisible)}>
             <Icon
               id="icon-comment"
@@ -94,7 +98,10 @@ export default function HaikuPostActions({
             View comments
           </Link>
         </div>
-        <button type="button" onClick={() => handleSave(haikuId, userId)}>
+        <button
+          type="button"
+          aria-label="Save"
+          onClick={() => handleSave(haikuId, userId)}>
           <Icon
             id="icon-save"
             className={`w-6 h-6 stroke-current ${
