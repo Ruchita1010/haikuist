@@ -1,6 +1,6 @@
 import { Link, Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import Navbar from '../components/shared/Navbar';
+import { useAuth } from '@context/AuthContext';
+import Navbar from './Navbar';
 
 export default function RootLayout() {
   const { session } = useAuth();

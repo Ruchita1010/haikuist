@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signOutUser } from '../../lib/supabase/api';
-import { useTheme } from '../../context/ThemeContext';
-import Icon from '../../components/shared/Icon';
+import { signOutUser } from '@lib/supabase/api';
+import { useTheme } from '@context/ThemeContext';
+import Icon from '@components/Icon';
 
 export default function Settings() {
   const navigate = useNavigate();

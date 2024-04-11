@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { PostgrestError } from '@supabase/supabase-js';
-import { HaikuPostType } from '../../types';
-import { getUserHaikuPosts } from '../../lib/supabase/api';
-import { useAuth } from '../../context/AuthContext';
+import { HaikuPostType } from '@/types';
+import { getUserHaikuPosts } from '@lib/supabase/api';
+import { useAuth } from '@context/AuthContext';
 import Loader from './Loader';
-import HaikuPost from './HaikuPost';
+import HaikuPost from './HaikuPost/HaikuPost';
 
 type TabProps = {
   tabId: string;

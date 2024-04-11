@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-import { ProfileSchema } from '../../lib/validation';
+import { ProfileSchema } from '@/lib/validation';
 
 type AvatarUploadProps = {
   register: UseFormRegister<ProfileSchema>;

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { supabase } from '../../lib/supabase/supabaseClient';
-import { getNotificationCount } from '../../lib/supabase/api';
-import { useAuth } from '../../context/AuthContext';
-import Icon from './Icon';
+import { supabase } from '@lib/supabase/supabaseClient';
+import { getNotificationCount } from '@lib/supabase/api';
+import { useAuth } from '@context/AuthContext';
+import Icon from '@components/Icon';
 
 const navItems = ['home', 'notifications', 'create', 'profile'];
 

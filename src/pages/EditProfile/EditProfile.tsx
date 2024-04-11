@@ -8,12 +8,12 @@ import {
   getUserById,
   updateProfile,
   uploadAvatar,
-} from '../../lib/supabase/api';
-import { ProfileSchema, profileSchema } from '../../lib/validation';
-import { UserProfile } from '../../types';
-import { useAuth } from '../../context/AuthContext';
-import Loader from '../../components/shared/Loader';
-import Icon from '../../components/shared/Icon';
+} from '@lib/supabase/api';
+import { ProfileSchema, profileSchema } from '@lib/validation';
+import { UserProfile } from '@/types';
+import { useAuth } from '@context/AuthContext';
+import Icon from '@components/Icon';
+import Loader from '@components/Loader';
 import AvatarUpload from './AvatarUpload';
 
 export default function EditProfile() {

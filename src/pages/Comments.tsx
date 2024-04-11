@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PostgrestError } from '@supabase/supabase-js';
-import { getAvatarUrl, getComments } from '../../lib/supabase/api';
-import { Comment } from '../../types';
-import { formatRelativeTime } from '../../utils/dateFormatter';
-import Icon from '../../components/shared/Icon';
-import Loader from '../../components/shared/Loader';
+import { getAvatarUrl, getComments } from '@lib/supabase/api';
+import { Comment } from '@/types';
+import { formatRelativeTime } from '@utils/dateFormatter';
+import Icon from '@components/Icon';
+import Loader from '@components/Loader';
 
 export default function Comments() {
   const { id } = useParams();

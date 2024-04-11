@@ -7,12 +7,12 @@ import {
   getUserHaikuPosts,
   getLikedHaikuPosts,
   getSavedHaikuPosts,
-} from '../../lib/supabase/api';
-import { useAuth } from '../../context/AuthContext';
-import { formatMonthYear } from '../../utils/dateFormatter';
-import Loader from '../../components/shared/Loader';
-import TabList from '../../components/shared/Tablist';
-import Tab from '../../components/shared/Tab';
+} from '@lib/supabase/api';
+import { useAuth } from '@context/AuthContext';
+import { formatMonthYear } from '@utils/dateFormatter';
+import Loader from '@components/Loader';
+import Tab from '@components/Tab';
+import TabList from '@components/Tablist';
 import Settings from './Settings';
 
 export default function Profile() {
@@ -90,13 +90,13 @@ export default function Profile() {
           }
         />
         <Route
-          path="/likes"
+          path="likes"
           element={
             <Tab key="likes" tabId="likes" getData={getLikedHaikuPosts} />
           }
         />
         <Route
-          path="/saves"
+          path="saves"
           element={
             <Tab key="saves" tabId="saves" getData={getSavedHaikuPosts} />
           }

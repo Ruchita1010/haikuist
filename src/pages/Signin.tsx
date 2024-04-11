@@ -1,30 +1,25 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { supabase } from '../../lib/supabase/supabaseClient';
-import { SignupSchema, signupSchema } from '../../lib/validation';
-import Loader from '../../components/shared/Loader';
+import { supabase } from '@lib/supabase/supabaseClient';
+import { SigninSchema, signinSchema } from '@lib/validation';
+import Loader from '@components/Loader';
 
-export default function SignupForm() {
+export default function Signin() {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-  } = useForm<SignupSchema>({
-    resolver: zodResolver(signupSchema),
+  } = useForm<SigninSchema>({
+    resolver: zodResolver(signinSchema),
   });
   const navigate = useNavigate();
 
-  const onSubmit = async (user: SignupSchema) => {
-    const { error, data } = await supabase.auth.signUp({
+  const onSubmit = async (user: SigninSchema) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: user.email,
       password: user.password,
-      options: {
-        data: {
-          username: user.username,
-        },
-      },
     });
 
     if (error) {
@@ -40,8 +35,8 @@ export default function SignupForm() {
 
   return (
     <div className="grid justify-center">
-      <div className="flex flex-col w-[330px] sm:w-[384px]">
-        <h1 className="text-2xl mb-6 font-semibold">Join Today</h1>
+      <div className="w-[300px] sm:w-[384px] flex flex-col">
+        <h1 className="text-2xl font-semibold mb-6">Welcome back</h1>
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <div className="mb-2.5">
             <label htmlFor="email" className="block mb-0.5">
@@ -55,20 +50,6 @@ export default function SignupForm() {
             />
             {errors.email && (
               <p className="text-sm text-red-700">{`${errors.email.message}`}</p>
-            )}
-          </div>
-          <div className="mb-2.5">
-            <label htmlFor="username" className="block mb-0.5">
-              Username
-            </label>
-            <input
-              type="text"
-              id="username"
-              className="w-full px-4 py-2 border border-zinc-300 outline-1 outline-zinc-400 rounded-md"
-              {...register('username')}
-            />
-            {errors.username && (
-              <p className="text-sm text-red-700">{`${errors.username.message}`}</p>
             )}
           </div>
           <div className="mb-2.5">
@@ -90,14 +71,14 @@ export default function SignupForm() {
             className="w-full flex justify-center gap-2 mt-4 px-4 py-2 bg-sky-300 outline-4 outline-sky-500 rounded-md"
             disabled={isSubmitting}>
             {isSubmitting && <Loader />}
-            <span>Sign Up</span>
+            <span>Sign In</span>
           </button>
         </form>
         <div className="grid justify-center mt-4">
           <p className="text-sm">
-            Already have an account?
-            <Link to="/signin" className="ml-1 text-sky-300 font-semibold">
-              Sign in
+            Don't have an account?
+            <Link to="/signup" className="ml-1 text-sky-300 font-semibold">
+              Sign up
             </Link>
           </p>
         </div>

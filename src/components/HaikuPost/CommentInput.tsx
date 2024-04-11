@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CommentSchema, commentSchema } from '../../lib/validation';
-import { addComment } from '../../lib/supabase/api';
+import { CommentSchema, commentSchema } from '@lib/validation';
+import { addComment } from '@lib/supabase/api';
 
 type CommentInputProps = {
   haikuId: string;

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { PostgrestError } from '@supabase/supabase-js';
-import { getHaikuPosts } from '../../lib/supabase/api';
-import { HaikuPostType } from '../../types';
-import Loader from '../../components/shared/Loader';
-import HaikuPost from '../../components/shared/HaikuPost';
+import { getHaikuPosts } from '@lib/supabase/api';
+import { HaikuPostType } from '@/types';
+import Loader from '@components/Loader';
+import HaikuPost from '@components/HaikuPost/HaikuPost';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);

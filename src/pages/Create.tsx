@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { HaikuSchema, haikuSchema } from '../../lib/validation';
-import { createHaikuPosts } from '../../lib/supabase/api';
-import { useAuth } from '../../context/AuthContext';
+import { HaikuSchema, haikuSchema } from '@lib/validation';
+import { createHaikuPosts } from '@lib/supabase/api';
+import { useAuth } from '@context/AuthContext';
 
 export default function Create() {
   const {

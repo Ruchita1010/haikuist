@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { getAvatarUrl } from '../../lib/supabase/api';
-import { AppNotification } from '../../types';
-import Icon from './Icon';
+import { getAvatarUrl } from '@lib/supabase/api';
+import { AppNotification } from '@/types';
+import Icon from '@components/Icon';
 
 type NotificationProps = Omit<AppNotification, 'id'>;
 

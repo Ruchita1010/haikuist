@@ -7,8 +7,8 @@ import {
   saveHaikuPost,
   unlikeHaikuPost,
   unsaveHaikuPost,
-} from '../../lib/supabase/api';
-import Icon from './Icon';
+} from '@lib/supabase/api';
+import Icon from '@components/Icon';
 import CommentInput from './CommentInput';
 
 type HaikuPostActionsProp = {

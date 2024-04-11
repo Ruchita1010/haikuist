@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
 import { PostgrestError } from '@supabase/supabase-js';
-import {
-  getNotifications,
-  setNotificationsAsRead,
-} from '../../lib/supabase/api';
-import { AppNotification } from '../../types';
-import { useAuth } from '../../context/AuthContext';
-import Loader from '../../components/shared/Loader';
-import Notification from '../../components/shared/Notification';
+import { getNotifications, setNotificationsAsRead } from '@lib/supabase/api';
+import { AppNotification } from '@/types';
+import { useAuth } from '@context/AuthContext';
+import Loader from '@components/Loader';
+import Notification from './Notification';
 
 export default function Notifications() {
   const { session } = useAuth();
