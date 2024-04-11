@@ -55,8 +55,9 @@ export default function CommentInput({
           id="comment"
           rows={1}
           autoFocus
-          aria-label="Add a comment..."
           placeholder="Add a comment..."
+          aria-label="Add a comment"
+          aria-invalid={errors.comment ? 'true' : 'false'}
           className="resize-none w-full px-1 bg-transparent outline-none focus:ring-1 ring-fgColor/50"
           onInput={handleInput}
           {...register('comment')}></textarea>
@@ -68,7 +69,9 @@ export default function CommentInput({
         </button>
       </div>
       {errors.comment && (
-        <p className="text-sm text-errColor">{`${errors.comment.message}`}</p>
+        <p
+          role="alert"
+          className="text-sm text-errColor">{`${errors.comment.message}`}</p>
       )}
     </form>
   );

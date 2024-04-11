@@ -135,11 +135,15 @@ export default function EditProfile() {
           <input
             type="text"
             id="username"
+            aria-required={`${!profileSchema.shape.username.isOptional()}`}
+            aria-invalid={errors.username ? 'true' : 'false'}
             className="w-full px-4 py-2 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
             {...register('username')}
           />
           {errors.username && (
-            <p className="text-sm text-errColor">{`${errors.username.message}`}</p>
+            <p
+              role="alert"
+              className="text-sm text-errColor">{`${errors.username.message}`}</p>
           )}
         </div>
         <div className="mb-4">
@@ -149,10 +153,13 @@ export default function EditProfile() {
           <textarea
             id="bio"
             rows={3}
+            aria-invalid={errors.bio ? 'true' : 'false'}
             className="resize-none w-full px-4 py-2 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
             {...register('bio')}></textarea>
           {errors.bio && (
-            <p className="text-sm text-errColor">{`${errors.bio.message}`}</p>
+            <p
+              role="alert"
+              className="text-sm text-errColor">{`${errors.bio.message}`}</p>
           )}
         </div>
         <div className="grid justify-items-end">

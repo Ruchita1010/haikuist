@@ -48,12 +48,15 @@ export default function Create() {
               <textarea
                 id="haiku"
                 rows={4}
-                aria-label="write your haiku"
                 placeholder="old pond&#10;frog leaps in&#10;water's sound"
+                aria-label="Write your haiku"
+                aria-invalid={errors.haiku ? 'true' : 'false'}
                 className="resize-none w-full p-4 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
                 {...register('haiku')}></textarea>
               {errors.haiku && (
-                <p className="text-errColor">{`${errors.haiku.message}`}</p>
+                <p
+                  role="alert"
+                  className="text-errColor">{`${errors.haiku.message}`}</p>
               )}
             </div>
             <button

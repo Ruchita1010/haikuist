@@ -45,11 +45,15 @@ export default function Signin() {
             <input
               type="email"
               id="email"
+              aria-required={`${!signinSchema.shape.email.isOptional()}`}
+              aria-invalid={errors.email ? 'true' : 'false'}
               className="w-full px-4 py-2 border border-zinc-300 outline-1 outline-zinc-400 rounded-md"
               {...register('email')}
             />
             {errors.email && (
-              <p className="text-sm text-red-700">{`${errors.email.message}`}</p>
+              <p
+                role="alert"
+                className="text-sm text-red-700">{`${errors.email.message}`}</p>
             )}
           </div>
           <div className="mb-2.5">
@@ -59,11 +63,15 @@ export default function Signin() {
             <input
               type="password"
               id="password"
+              aria-required={`${!signinSchema.shape.password.isOptional()}`}
+              aria-invalid={errors.password ? 'true' : 'false'}
               className="w-full px-4 py-2 border border-zinc-300 outline-1 outline-zinc-400 rounded-md"
               {...register('password')}
             />
             {errors.password && (
-              <p className="text-sm text-red-700">{`${errors.password.message}`}</p>
+              <p
+                role="alert"
+                className="text-sm text-red-700">{`${errors.password.message}`}</p>
             )}
           </div>
           <button

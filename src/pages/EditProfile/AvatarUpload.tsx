@@ -50,6 +50,7 @@ export default function AvatarUpload({
         type="file"
         accept="image/jpeg, image/jpg, image/png, image/webp"
         id="avatar"
+        aria-invalid={errors.avatar ? 'true' : 'false'}
         className="hidden"
         ref={(e) => {
           ref(e);
@@ -64,7 +65,9 @@ export default function AvatarUpload({
         Update Avatar
       </button>
       {errors.avatar && (
-        <p className="text-sm text-errColor">{`${errors.avatar.message}`}</p>
+        <p
+          role="alert"
+          className="text-sm text-errColor">{`${errors.avatar.message}`}</p>
       )}
     </div>
   );
