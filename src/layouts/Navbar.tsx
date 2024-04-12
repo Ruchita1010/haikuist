@@ -73,8 +73,11 @@ export default function Navbar() {
                   }`}
                 />
                 {displayBadge && (
-                  <span className="absolute -top-1 right-0 min-w-4 h-4 flex justify-center items-center px-0.5 bg-fgColor text-bgColor text-xs rounded-full">
+                  <span
+                    role="status"
+                    className="absolute -top-1 right-0 min-w-4 h-4 flex justify-center items-center px-0.5 bg-fgColor text-bgColor text-xs rounded-full">
                     {notificationCount}
+                    <span className="sr-only">unread notifications</span>
                   </span>
                 )}
               </div>
