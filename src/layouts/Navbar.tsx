@@ -78,7 +78,7 @@ export default function Navbar() {
                   </span>
                 )}
               </div>
-              <span className="hidden lg:block first-letter:uppercase">
+              <span className="sr-only lg:not-sr-only lg:block first-letter:uppercase">
                 {navItem}
               </span>
             </NavLink>
