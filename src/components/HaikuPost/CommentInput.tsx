@@ -58,7 +58,7 @@ export default function CommentInput({
           placeholder="Add a comment..."
           aria-label="Add a comment"
           aria-invalid={errors.comment ? 'true' : 'false'}
-          className="resize-none w-full px-1 bg-transparent outline-none focus:ring-1 ring-fgColor/50"
+          className="resize-none w-full px-1 bg-transparent"
           onInput={handleInput}
           {...register('comment')}></textarea>
         <button
