@@ -16,7 +16,10 @@ function App() {
   const { theme } = useTheme();
 
   return (
-    <div className={`min-h-screen ${theme === 'dark' ? 'dark' : 'light'}`}>
+    <div
+      className={`min-h-screen bg-bgColor text-fgColor ${
+        theme === 'dark' ? 'dark' : 'light'
+      }`}>
       <Routes>
         {/* public routes */}
         <Route element={<AuthLayout />}>

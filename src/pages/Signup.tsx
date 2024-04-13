@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { supabase } from '@lib/supabase/supabaseClient';
 import { SignupSchema, signupSchema } from '@lib/validation';
+import FormError from '@/components/FormError';
 import Loader from '@components/Loader';
 
 export default function Signup() {
@@ -39,93 +40,84 @@ export default function Signup() {
   };
 
   return (
-    <div className="grid justify-center">
-      <div className="flex flex-col w-[330px] sm:w-[384px]">
-        <h1 className="text-2xl mb-6 font-semibold">Join Today</h1>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <div className="mb-2.5">
-            <label htmlFor="email" className="block mb-0.5">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              aria-required={`${!signupSchema.shape.email.isOptional()}`}
-              aria-invalid={errors.email ? 'true' : 'false'}
-              className="w-full px-4 py-2 border border-zinc-300 outline-1 outline-zinc-400 rounded-md"
-              {...register('email')}
-            />
-            {errors.email && (
-              <p
-                role="alert"
-                className="text-sm text-red-700">{`${errors.email.message}`}</p>
-            )}
-          </div>
-          <div className="mb-2.5">
-            <label htmlFor="username" className="block mb-0.5">
-              Username
-            </label>
-            <input
-              type="text"
-              id="username"
-              aria-required={`${!signupSchema.shape.username.isOptional()}`}
-              aria-invalid={errors.username ? 'true' : 'false'}
-              className="w-full px-4 py-2 border border-zinc-300 outline-1 outline-zinc-400 rounded-md"
-              {...register('username')}
-            />
-            {errors.username && (
-              <p
-                role="alert"
-                className="text-sm text-red-700">{`${errors.username.message}`}</p>
-            )}
-          </div>
-          <div className="mb-2.5">
-            <label htmlFor="password" className="block mb-0.5">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              aria-required={`${!signupSchema.shape.password.isOptional()}`}
-              aria-invalid={errors.password ? 'true' : 'false'}
-              className="w-full px-4 py-2 border border-zinc-300 outline-1 outline-zinc-400 rounded-md"
-              {...register('password')}
-            />
-            {errors.password && (
-              <p
-                role="alert"
-                className="text-sm text-red-700">{`${errors.password.message}`}</p>
-            )}
-          </div>
-          <button
-            type="submit"
-            className="w-full flex justify-center gap-2 mt-4 px-4 py-2 bg-sky-300 outline-4 outline-sky-500 rounded-md"
-            disabled={isSubmitting}>
-            {isSubmitting && <Loader />}
-            <span>Sign Up</span>
-          </button>
-        </form>
-        <div className="grid justify-center mt-4">
-          <p className="text-sm">
-            Already have an account?
-            <Link to="/signin" className="ml-1 text-sky-300 font-semibold">
-              Sign in
-            </Link>
-          </p>
+    <>
+      <h1 className="mb-6 text-2xl font-medium">Create an account</h1>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className="grid gap-4">
+        <div>
+          <label htmlFor="email" className="block mb-0.5">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            placeholder="you@example.com"
+            aria-required={`${!signupSchema.shape.email.isOptional()}`}
+            aria-invalid={errors.email ? 'true' : 'false'}
+            className="w-full px-4 py-2 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
+            {...register('email')}
+          />
+          <FormError error={errors.email} />
         </div>
-        <div className="grid items-center gap-4 mt-4">
-          <div className="flex justify-center items-center gap-2">
-            <div className="w-full border-t border-zinc-300"></div>
-            <span>or</span>
-            <div className="w-full border-t border-zinc-300"></div>
-          </div>
-          <button
-            type="button"
-            className="px-4 py-2 bg-sky-200 outline-4 outline-sky-300 rounded-md">
-            Continue with Google
-          </button>
+        <div>
+          <label htmlFor="username" className="block mb-0.5">
+            Username
+          </label>
+          <input
+            type="text"
+            id="username"
+            placeholder="haikuist123"
+            aria-required={`${!signupSchema.shape.username.isOptional()}`}
+            aria-invalid={errors.username ? 'true' : 'false'}
+            className="w-full px-4 py-2 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
+            {...register('username')}
+          />
+          <FormError error={errors.username} />
         </div>
+        <div>
+          <label htmlFor="password" className="block mb-0.5">
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            placeholder="••••••••"
+            aria-required={`${!signupSchema.shape.password.isOptional()}`}
+            aria-invalid={errors.password ? 'true' : 'false'}
+            className="w-full px-4 py-2 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
+            {...register('password')}
+          />
+          <FormError error={errors.password} />
+        </div>
+        <button
+          type="submit"
+          className="flex justify-center gap-2 mt-4 py-2 bg-fgColor text-bgColor font-medium rounded-md hover:bg-fgColor/80"
+          disabled={isSubmitting}>
+          Sign Up
+          {isSubmitting && <Loader />}
+        </button>
+      </form>
+
+      <div className="text-center mt-4">
+        <p>
+          Already have an account?
+          <Link to="/signin" className="ml-1 font-medium underline">
+            Sign in
+          </Link>
+        </p>
       </div>
-    </div>
+
+      <div className="grid gap-4 mt-4">
+        <div className="flex items-center gap-2">
+          <div className="w-full border-t-2 border-fgColor/15"></div>
+          or
+          <div className="w-full border-t-2 border-fgColor/15"></div>
+        </div>
+        <button
+          type="button"
+          className="py-2 bg-fgColor/10 border border-fgColor/15 rounded-md hover:bg-fgColor/15">
+          Continue with Google
+        </button>
+      </div>
+    </>
   );
 }

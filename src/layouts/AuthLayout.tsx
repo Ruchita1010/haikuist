@@ -7,14 +7,20 @@ export default function AuthLayout() {
     <>
       {session === null ? (
         <div className="flex">
-          <img
-            src="/assets/images/side-img.jpg"
-            alt=""
-            className="h-screen w-1/2 hidden xl:block flex-1 basis-1/6 object-cover bg-no-repeat"
-          />
-          <section className="flex flex-col flex-1 px-6 py-4">
-            <div className="text-xl font-semibold mt-1 mb-6">Haikuist</div>
-            <Outlet />
+          <div className="flex-1 hidden xl:block">
+            <img
+              src="/assets/images/side-img.jpg"
+              alt=""
+              className="w-full object-cover"
+            />
+          </div>
+          <section className="min-h-screen flex-1 flex flex-col px-6 py-4">
+            <div className="text-xl font-semibold">Haikuist</div>
+            <div className="h-full flex flex-col justify-center items-center">
+              <div className="w-full sm:max-w-md">
+                <Outlet />
+              </div>
+            </div>
           </section>
         </div>
       ) : (

@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { supabase } from '@lib/supabase/supabaseClient';
 import { SigninSchema, signinSchema } from '@lib/validation';
+import FormError from '@/components/FormError';
 import Loader from '@components/Loader';
 
 export default function Signin() {
@@ -34,75 +35,68 @@ export default function Signin() {
   };
 
   return (
-    <div className="grid justify-center">
-      <div className="w-[300px] sm:w-[384px] flex flex-col">
-        <h1 className="text-2xl font-semibold mb-6">Welcome back</h1>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <div className="mb-2.5">
-            <label htmlFor="email" className="block mb-0.5">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              aria-required={`${!signinSchema.shape.email.isOptional()}`}
-              aria-invalid={errors.email ? 'true' : 'false'}
-              className="w-full px-4 py-2 border border-zinc-300 outline-1 outline-zinc-400 rounded-md"
-              {...register('email')}
-            />
-            {errors.email && (
-              <p
-                role="alert"
-                className="text-sm text-red-700">{`${errors.email.message}`}</p>
-            )}
-          </div>
-          <div className="mb-2.5">
-            <label htmlFor="password" className="block mb-0.5">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              aria-required={`${!signinSchema.shape.password.isOptional()}`}
-              aria-invalid={errors.password ? 'true' : 'false'}
-              className="w-full px-4 py-2 border border-zinc-300 outline-1 outline-zinc-400 rounded-md"
-              {...register('password')}
-            />
-            {errors.password && (
-              <p
-                role="alert"
-                className="text-sm text-red-700">{`${errors.password.message}`}</p>
-            )}
-          </div>
-          <button
-            type="submit"
-            className="w-full flex justify-center gap-2 mt-4 px-4 py-2 bg-sky-300 outline-4 outline-sky-500 rounded-md"
-            disabled={isSubmitting}>
-            {isSubmitting && <Loader />}
-            <span>Sign In</span>
-          </button>
-        </form>
-        <div className="grid justify-center mt-4">
-          <p className="text-sm">
-            Don't have an account?
-            <Link to="/signup" className="ml-1 text-sky-300 font-semibold">
-              Sign up
-            </Link>
-          </p>
+    <>
+      <h1 className="mb-6 text-2xl font-medium">Welcome back</h1>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className="grid gap-4">
+        <div>
+          <label htmlFor="email" className="block mb-0.5">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            placeholder="you@example.com"
+            aria-required={`${!signinSchema.shape.email.isOptional()}`}
+            aria-invalid={errors.email ? 'true' : 'false'}
+            className="w-full px-4 py-2 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
+            {...register('email')}
+          />
+          <FormError error={errors.email} />
         </div>
-        <div className="grid items-center gap-4 mt-4">
-          <div className="flex justify-center items-center gap-2">
-            <div className="w-full border-t border-zinc-300"></div>
-            <span>or</span>
-            <div className="w-full border-t border-zinc-300"></div>
-          </div>
-          <button
-            type="button"
-            className="px-4 py-2 bg-sky-200 outline-4 outline-sky-300 rounded-md">
-            Continue with Google
-          </button>
+        <div>
+          <label htmlFor="password" className="block mb-0.5">
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            placeholder="••••••••"
+            aria-required={`${!signinSchema.shape.password.isOptional()}`}
+            aria-invalid={errors.password ? 'true' : 'false'}
+            className="w-full px-4 py-2 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
+            {...register('password')}
+          />
+          <FormError error={errors.password} />
         </div>
+        <button
+          type="submit"
+          className="flex justify-center gap-2 mt-4 py-2 bg-fgColor text-bgColor font-medium rounded-md hover:bg-fgColor/80"
+          disabled={isSubmitting}>
+          Sign In
+          {isSubmitting && <Loader />}
+        </button>
+      </form>
+      <div className="text-center mt-4">
+        <p>
+          Don't have an account?
+          <Link to="/signup" className="ml-1 font-medium underline">
+            Sign up
+          </Link>
+        </p>
       </div>
-    </div>
+
+      <div className="grid gap-4 mt-4">
+        <div className="flex items-center gap-2">
+          <div className="w-full border-t-2 border-fgColor/15"></div>
+          or
+          <div className="w-full border-t-2 border-fgColor/15"></div>
+        </div>
+        <button
+          type="button"
+          className="py-2 bg-fgColor/10 border border-fgColor/15 rounded-md hover:bg-fgColor/15">
+          Continue with Google
+        </button>
+      </div>
+    </>
   );
 }
