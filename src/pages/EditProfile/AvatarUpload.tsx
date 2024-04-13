@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { ProfileSchema } from '@/lib/validation';
+import FormError from '@/components/FormError';
 
 type AvatarUploadProps = {
   register: UseFormRegister<ProfileSchema>;
@@ -64,11 +65,7 @@ export default function AvatarUpload({
         className="text-center p-2 border border-fgColor/50 rounded-md hover:bg-fgColor/10">
         Update Avatar
       </button>
-      {errors.avatar && (
-        <p
-          role="alert"
-          className="text-sm text-errColor">{`${errors.avatar.message}`}</p>
-      )}
+      <FormError error={errors.avatar} />
     </div>
   );
 }

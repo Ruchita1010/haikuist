@@ -14,6 +14,7 @@ import { UserProfile } from '@/types';
 import { useAuth } from '@context/AuthContext';
 import Icon from '@components/Icon';
 import Loader from '@components/Loader';
+import FormError from '@/components/FormError';
 import AvatarUpload from './AvatarUpload';
 
 export default function EditProfile() {
@@ -140,11 +141,7 @@ export default function EditProfile() {
             className="w-full px-4 py-2 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
             {...register('username')}
           />
-          {errors.username && (
-            <p
-              role="alert"
-              className="text-sm text-errColor">{`${errors.username.message}`}</p>
-          )}
+          <FormError error={errors.username} />
         </div>
         <div className="mb-4">
           <label htmlFor="bio" className="block mb-0.5">
@@ -156,11 +153,7 @@ export default function EditProfile() {
             aria-invalid={errors.bio ? 'true' : 'false'}
             className="resize-none w-full px-4 py-2 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
             {...register('bio')}></textarea>
-          {errors.bio && (
-            <p
-              role="alert"
-              className="text-sm text-errColor">{`${errors.bio.message}`}</p>
-          )}
+          <FormError error={errors.bio} />
         </div>
         <div className="grid justify-items-end">
           <button

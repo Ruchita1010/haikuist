@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { HaikuSchema, haikuSchema } from '@lib/validation';
 import { createHaikuPosts } from '@lib/supabase/api';
 import { useAuth } from '@context/AuthContext';
+import FormError from '@/components/FormError';
 
 export default function Create() {
   const {
@@ -53,11 +54,7 @@ export default function Create() {
                 aria-invalid={errors.haiku ? 'true' : 'false'}
                 className="resize-none w-full p-4 bg-transparent text-fgColor border border-fgColor/25 rounded-md"
                 {...register('haiku')}></textarea>
-              {errors.haiku && (
-                <p
-                  role="alert"
-                  className="text-errColor">{`${errors.haiku.message}`}</p>
-              )}
+              <FormError error={errors.haiku} />
             </div>
             <button
               type="submit"

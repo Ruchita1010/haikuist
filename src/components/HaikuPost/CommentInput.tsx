@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CommentSchema, commentSchema } from '@lib/validation';
 import { addComment } from '@lib/supabase/api';
+import FormError from '../FormError';
 
 type CommentInputProps = {
   haikuId: string;
@@ -68,11 +69,7 @@ export default function CommentInput({
           Add
         </button>
       </div>
-      {errors.comment && (
-        <p
-          role="alert"
-          className="text-sm text-errColor">{`${errors.comment.message}`}</p>
-      )}
+      <FormError error={errors.comment} />
     </form>
   );
 }
