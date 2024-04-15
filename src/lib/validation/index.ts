@@ -5,7 +5,10 @@ export const signupSchema = z.object({
   username: z
     .string()
     .min(3, { message: 'Must be atleast 3 characters' })
-    .max(30, { message: 'Must be atmost 30 characters' }),
+    .max(30, { message: 'Must be atmost 30 characters' })
+    .regex(/^[\w]+$/, {
+      message: 'Username can only contain letters, numbers, and underscores',
+    }),
   password: z.string().min(8, { message: 'Must be atleast 8 characters' }),
 });
 
@@ -70,7 +73,10 @@ export const profileSchema = z.object({
   username: z
     .string()
     .min(3, { message: 'Must be atleast 3 characters' })
-    .max(30, { message: 'Must be atmost 30 characters' }),
+    .max(30, { message: 'Must be atmost 30 characters' })
+    .regex(/^[\w]+$/, {
+      message: 'Username can only contain letters, numbers, and underscores',
+    }),
   bio: z.string().max(150, { message: 'Must be atmost 150 characters' }),
 });
 
