@@ -53,7 +53,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="flex md:flex-col justify-around lg:items-start">
+    <nav className="flex md:flex-col justify-around lg:items-start bg-bgColor">
       {navItems.map((navItem) => {
         const isActive = pathname === `/${navItem}`;
         const isItemNotifications = navItem === 'notifications';
