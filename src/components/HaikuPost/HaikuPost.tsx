@@ -24,7 +24,7 @@ export default function HaikuPost({
           <img
             src={avatarUrl}
             alt={`${username}'s avatar`}
-            className="flex-shrink-0 w-11 h-11 object-cover rounded-full"
+            className="flex-shrink-0 w-10 h-10 object-cover rounded-full"
           />
           <span>{username}</span>
         </div>
@@ -32,7 +32,7 @@ export default function HaikuPost({
           <time dateTime={created_at}>{formatRelativeTime(created_at)}</time>
         </span>
       </div>
-      <div className="text-lg pt-4 pb-6">
+      <div className="pt-4 pb-6">
         {lines.map((line, index) => (
           <p key={index} className="break-words">
             {line}
