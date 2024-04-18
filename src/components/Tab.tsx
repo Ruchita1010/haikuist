@@ -31,7 +31,11 @@ export default function Tab({ tabId, getData }: TabProps) {
   }, []);
 
   if (loading) {
-    return <Loader />;
+    return (
+      <div className="mt-6">
+        <Loader />
+      </div>
+    );
   }
 
   if (error) {

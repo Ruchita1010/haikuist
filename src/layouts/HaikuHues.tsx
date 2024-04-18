@@ -32,7 +32,7 @@ export default function HaikuHues() {
   }
 
   return (
-    <div className="p-5">
+    <>
       <h1 className="text-center text-lg mb-6">
         Haiku Hues of {getCurrentMonthName()}
       </h1>
@@ -68,6 +68,6 @@ export default function HaikuHues() {
           })
         )}
       </div>
-    </div>
+    </>
   );
 }

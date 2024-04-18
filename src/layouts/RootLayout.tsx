@@ -21,7 +21,7 @@ export default function RootLayout() {
       <main className="flex-1 min-h-screen min-w-0 px-6 pt-3 border-fgColor/15 sm:border-r">
         <Outlet />
       </main>
-      <aside className="hidden md:block min-w-72 max-w-72 h-screen sticky top-0">
+      <aside className="hidden md:block min-w-72 max-w-72 h-screen sticky top-0 p-5">
         <HaikuHues />
       </aside>
     </div>
