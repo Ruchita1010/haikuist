@@ -1,22 +1,32 @@
 import { z } from 'zod';
 
 export const signupSchema = z.object({
-  email: z.string().email({ message: 'Must be a valid email' }),
+  email: z
+    .string()
+    .min(1, { message: 'Email is required' })
+    .email({ message: 'Email must be valid' }),
   username: z
     .string()
-    .min(3, { message: 'Must be atleast 3 characters' })
-    .max(30, { message: 'Must be atmost 30 characters' })
+    .min(3, { message: 'Username must be 3 characters or more' })
+    .max(30, { message: 'Username must be 30 characters or less' })
     .regex(/^[\w]+$/, {
       message: 'Username can only contain letters, numbers, and underscores',
     }),
-  password: z.string().min(8, { message: 'Must be atleast 8 characters' }),
+  password: z
+    .string()
+    .min(8, { message: 'Password must be 8 characters or more' }),
 });
 
 export type SignupSchema = z.infer<typeof signupSchema>;
 
 export const signinSchema = z.object({
-  email: z.string().email({ message: 'Must be a valid email' }),
-  password: z.string().min(8, { message: 'Must be atleast 8 characters' }),
+  email: z
+    .string()
+    .min(1, { message: 'Email is required' })
+    .email({ message: 'Email must be valid' }),
+  password: z
+    .string()
+    .min(8, { message: 'Password must be 8 characters or more' }),
 });
 
 export type SigninSchema = z.infer<typeof signinSchema>;
@@ -36,9 +46,9 @@ export const haikuSchema = z.object({
   haiku: z
     .string()
     .trim()
-    .max(170, 'Must not exceed 170 characters')
-    .refine(isValidSyllableCount, 'Must be between 3 to 17 syllables')
-    .refine(isValidLineCount, 'Must be between 1 to 4 lines'),
+    .max(170, 'Haiku must be 170 characters or less')
+    .refine(isValidSyllableCount, 'Haiku must be between 3 to 17 syllables')
+    .refine(isValidLineCount, 'Haikus must be between 1 to 4 lines'),
 });
 
 export type HaikuSchema = z.infer<typeof haikuSchema>;
@@ -67,17 +77,20 @@ export const profileSchema = z.object({
      so that the type ProfileSchema gets inferred as "FileList | undefined". */
   avatar: z
     .instanceof(FileList)
-    .refine(isValidFileSize, `Must be 5MB or less`)
-    .refine(isValidFileType, 'Must be in .jpg, .jpeg, .png, .webp format')
+    .refine(isValidFileSize, 'Avatar file size must be 5MB or less')
+    .refine(
+      isValidFileType,
+      'Avatar file must be in .jpg, .jpeg, .png, or .webp format'
+    )
     .optional(),
   username: z
     .string()
-    .min(3, { message: 'Must be atleast 3 characters' })
-    .max(30, { message: 'Must be atmost 30 characters' })
+    .min(3, { message: 'Username must be 3 characters or more' })
+    .max(30, { message: 'Username must be 30 characters or less' })
     .regex(/^[\w]+$/, {
       message: 'Username can only contain letters, numbers, and underscores',
     }),
-  bio: z.string().max(150, { message: 'Must be atmost 150 characters' }),
+  bio: z.string().max(150, { message: 'Bio must be 150 characters or less' }),
 });
 
 export type ProfileSchema = z.infer<typeof profileSchema>;
@@ -86,8 +99,8 @@ export const commentSchema = z.object({
   comment: z
     .string()
     .trim()
-    .min(1, { message: 'Must be non empty' })
-    .max(272, { message: 'Must not exceed 272 characters' }),
+    .min(1, { message: 'Comment cannot be empty' })
+    .max(272, { message: 'Comment must be 272 characters or less' }),
 });
 
 export type CommentSchema = z.infer<typeof commentSchema>;
