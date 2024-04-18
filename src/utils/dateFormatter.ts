@@ -1,3 +1,8 @@
+export const getCurrentMonthName = () => {
+  const currentDate = new Date();
+  return currentDate.toLocaleDateString('en-US', { month: 'long' });
+};
+
 export const formatMonthYear = (timestamp: string) => {
   const date = new Date(timestamp);
   return date.toLocaleDateString('en-US', {

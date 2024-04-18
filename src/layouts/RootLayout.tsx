@@ -1,5 +1,6 @@
 import { Link, Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '@context/AuthContext';
+import HaikuHues from './HaikuHues';
 import Navbar from './Navbar';
 
 export default function RootLayout() {
@@ -21,7 +22,7 @@ export default function RootLayout() {
         <Outlet />
       </main>
       <aside className="hidden md:block min-w-72 max-w-72 h-screen sticky top-0">
-        <h1>Today's Pick</h1>
+        <HaikuHues />
       </aside>
     </div>
   );

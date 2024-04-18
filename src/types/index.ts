@@ -37,3 +37,10 @@ export type AppNotification = {
     avatar_path: string;
   };
 };
+
+export type HaikuHue = {
+  id: string;
+  content: string;
+  username: string;
+  avatar_path: string;
+};

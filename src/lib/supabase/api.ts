@@ -2,9 +2,10 @@ import { supabase } from './supabaseClient';
 import {
   AppNotification,
   Comment,
+  HaikuHue,
   HaikuPostType,
   UserProfile,
-} from '../../types';
+} from '@/types';
 
 export const getAvatarUrl = (filePath: string) => {
   // getPublicUrl() doesn't make a DB call, simply does string concatenation
@@ -168,4 +169,8 @@ export const getNotificationCount = (userId: string) => {
     .select('*', { count: 'exact', head: true })
     .eq('recipient_profile_id', userId)
     .eq('is_read', false);
+};
+
+export const getHaikuHues = () => {
+  return supabase.rpc('get_haiku_hues').returns<HaikuHue[]>();
 };
