@@ -49,17 +49,21 @@ export default function Tab({ tabId, getData }: TabProps) {
       aria-labelledby={`tab-${tabId}`}
       tabIndex={0}
       className="flex flex-col gap-4 min-h-screen">
-      {haikuPosts.map(({ id, content, created_at, profile }) => {
-        return (
-          <HaikuPost
-            key={id}
-            id={id}
-            content={content}
-            created_at={created_at}
-            profile={profile}
-          />
-        );
-      })}
+      {haikuPosts.length === 0 ? (
+        <p className="mt-10 text-lg text-center">{`You don't have any ${tabId} yet`}</p>
+      ) : (
+        haikuPosts.map(({ id, content, created_at, profile }) => {
+          return (
+            <HaikuPost
+              key={id}
+              id={id}
+              content={content}
+              created_at={created_at}
+              profile={profile}
+            />
+          );
+        })
+      )}
     </div>
   );
 }

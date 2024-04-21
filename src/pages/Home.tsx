@@ -38,17 +38,23 @@ export default function Home() {
       <h1 id="accessible-list-1" className="sr-only">
         Home
       </h1>
-      {haikuPosts.map(({ id, content, created_at, profile }) => {
-        return (
-          <HaikuPost
-            key={id}
-            id={id}
-            content={content}
-            created_at={created_at}
-            profile={profile}
-          />
-        );
-      })}
+      {haikuPosts.length === 0 ? (
+        <p className="mt-10 text-xl text-center">
+          Looks like we don't have any haikus yet...
+        </p>
+      ) : (
+        haikuPosts.map(({ id, content, created_at, profile }) => {
+          return (
+            <HaikuPost
+              key={id}
+              id={id}
+              content={content}
+              created_at={created_at}
+              profile={profile}
+            />
+          );
+        })
+      )}
     </section>
   );
 }
