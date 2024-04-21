@@ -1,9 +1,9 @@
-import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { HaikuSchema, haikuSchema } from '@lib/validation';
 import { createHaikuPosts } from '@lib/supabase/api';
 import { useAuth } from '@context/AuthContext';
+import { useSnackbar } from '@context/SnackbarContext';
 import FormError from '@/components/FormError';
 
 export default function Create() {
@@ -15,8 +15,8 @@ export default function Create() {
   } = useForm<HaikuSchema>({
     resolver: zodResolver(haikuSchema),
   });
-  const navigate = useNavigate();
   const { session } = useAuth();
+  const { enqueueSnackbar } = useSnackbar();
 
   const onSubmit = async (newHaiku: HaikuSchema) => {
     const { error } = await createHaikuPosts(
@@ -24,12 +24,10 @@ export default function Create() {
       newHaiku.haiku
     );
     if (error) {
-      // set toast message
-      alert(error.message);
+      enqueueSnackbar('Error posting your haiku');
       return;
     }
-
-    navigate('/home');
+    enqueueSnackbar('Your haiku is posted');
     reset();
   };
 

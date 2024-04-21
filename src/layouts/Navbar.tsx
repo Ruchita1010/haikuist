@@ -38,11 +38,7 @@ export default function Navbar() {
   useEffect(() => {
     (async () => {
       const { count, error } = await getNotificationCount(userId);
-      if (error) {
-        alert(error.message);
-        return;
-      }
-      if (count) {
+      if (!error && count) {
         setNotificationCount(count);
       }
     })();

@@ -1,8 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CommentSchema, commentSchema } from '@lib/validation';
 import { addComment } from '@lib/supabase/api';
-import FormError from '../FormError';
+import { CommentSchema, commentSchema } from '@lib/validation';
+import { useSnackbar } from '@context/SnackbarContext';
+import FormError from '@components/FormError';
 
 type CommentInputProps = {
   haikuId: string;
@@ -23,6 +24,7 @@ export default function CommentInput({
   } = useForm<CommentSchema>({
     resolver: zodResolver(commentSchema),
   });
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.target.style.height = 'inherit';
@@ -38,9 +40,10 @@ export default function CommentInput({
   const onSubmit = async (formData: CommentSchema) => {
     const { error } = await addComment(haikuId, userId, formData.comment);
     if (error) {
-      alert(error.message);
+      enqueueSnackbar('Error adding your comment');
       return;
     }
+    enqueueSnackbar('Your comment is added');
     reset();
   };
 

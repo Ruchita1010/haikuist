@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { useTheme } from '@context/ThemeContext';
+import { SnackbarProvider } from '@context/SnackbarContext';
 import AuthLayout from '@/layouts/AuthLayout';
 import Signin from '@pages/Signin';
 import Signup from '@pages/Signup';
@@ -20,24 +21,26 @@ function App() {
       className={`min-h-screen bg-bgColor text-fgColor ${
         theme === 'dark' ? 'dark' : 'light'
       }`}>
-      <Routes>
-        {/* public routes */}
-        <Route element={<AuthLayout />}>
-          {/* Can't pass an array of routes to 'path'. And it's only two routes, so separating them seems a good choice. It feels unnessary to create a helper function that uses 'map' to loop over the routes.*/}
-          <Route path="/" element={<Signin />} />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
-        </Route>
-        {/* private routes */}
-        <Route element={<RootLayout />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/haiku/:id" element={<Comments />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="/profile/*" element={<Profile />} />
-          <Route path="/edit-profile" element={<EditProfile />} />
-          <Route path="/notifications" element={<Notifications />} />
-        </Route>
-      </Routes>
+      <SnackbarProvider>
+        <Routes>
+          {/* public routes */}
+          <Route element={<AuthLayout />}>
+            {/* Can't pass an array of routes to 'path'. And it's only two routes, so separating them seems a good choice. It feels unnessary to create a helper function that uses 'map' to loop over the routes.*/}
+            <Route path="/" element={<Signin />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/signup" element={<Signup />} />
+          </Route>
+          {/* private routes */}
+          <Route element={<RootLayout />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/haiku/:id" element={<Comments />} />
+            <Route path="/create" element={<Create />} />
+            <Route path="/profile/*" element={<Profile />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
+            <Route path="/notifications" element={<Notifications />} />
+          </Route>
+        </Routes>
+      </SnackbarProvider>
     </div>
   );
 }

@@ -27,17 +27,13 @@ export default function HaikuPostActions({
   useEffect(() => {
     (async () => {
       const likeResult = await checkIsLiked(haikuId, userId);
-      if (likeResult.error) {
-        alert(likeResult.error.message);
-      } else {
-        likeResult.data && setHasLiked(true);
+      if (!likeResult.error && likeResult.data) {
+        setHasLiked(true);
       }
 
       const savedResult = await checkIsSaved(haikuId, userId);
-      if (savedResult.error) {
-        alert(savedResult.error.message);
-      } else {
-        savedResult.data && setHasSaved(true);
+      if (!savedResult.error && savedResult.data) {
+        setHasSaved(true);
       }
     })();
   }, []);
@@ -46,22 +42,18 @@ export default function HaikuPostActions({
     const { error } = await (hasLiked
       ? unlikeHaikuPost(haikuId, userId)
       : likeHaikuPost(haikuId, userId));
-    if (error) {
-      alert(error.message);
-      return;
+    if (!error) {
+      setHasLiked(!hasLiked);
     }
-    setHasLiked(!hasLiked);
   };
 
   const handleSave = async (haikuId: string, userId: string) => {
     const { error } = await (hasSaved
       ? unsaveHaikuPost(haikuId, userId)
       : saveHaikuPost(haikuId, userId));
-    if (error) {
-      alert(error.message);
-      return;
+    if (!error) {
+      setHasSaved(!hasSaved);
     }
-    setHasSaved(!hasSaved);
   };
 
   return (

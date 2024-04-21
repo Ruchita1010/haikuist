@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { supabase } from '@lib/supabase/supabaseClient';
 import { SigninSchema, signinSchema } from '@lib/validation';
+import { useSnackbar } from '@context/SnackbarContext';
 import FormError from '@/components/FormError';
 import Loader from '@components/Loader';
 
@@ -16,6 +17,7 @@ export default function Signin() {
     resolver: zodResolver(signinSchema),
   });
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const onSubmit = async (user: SigninSchema) => {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -24,8 +26,9 @@ export default function Signin() {
     });
 
     if (error) {
-      // set toast alert
-      alert(error.message);
+      error.status === 400
+        ? enqueueSnackbar(error.message)
+        : enqueueSnackbar('Error signing in');
       return;
     }
     if (data) {

@@ -27,7 +27,6 @@ export default function Notifications() {
         session?.user.id || ''
       );
       if (updateError) {
-        alert(updateError.message);
         return;
       }
     })();

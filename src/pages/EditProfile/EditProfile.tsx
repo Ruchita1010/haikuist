@@ -12,6 +12,7 @@ import {
 import { ProfileSchema, profileSchema } from '@lib/validation';
 import { UserProfile } from '@/types';
 import { useAuth } from '@context/AuthContext';
+import { useSnackbar } from '@context/SnackbarContext';
 import Icon from '@components/Icon';
 import Loader from '@components/Loader';
 import FormError from '@/components/FormError';
@@ -32,6 +33,7 @@ export default function EditProfile() {
     resolver: zodResolver(profileSchema),
   });
   const { session } = useAuth();
+  const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<PostgrestError | null>(null);
   const [avatarUrl, setAvatarUrl] = useState('/assets/default-pfp.svg');
@@ -86,7 +88,7 @@ export default function EditProfile() {
 
       const { error: uploadError } = await uploadAvatar(filePath, avatarFile);
       if (uploadError) {
-        alert(uploadError.message);
+        enqueueSnackbar('Error uploading avatar');
         return;
       }
       updates.avatar_path = filePath;
@@ -94,9 +96,10 @@ export default function EditProfile() {
 
     const { error } = await updateProfile(updates, session?.user.id);
     if (error) {
-      alert(error.message);
+      enqueueSnackbar('Error saving profile changes');
       return;
     }
+    enqueueSnackbar('Profile changes saved');
     // Case: If the user changes the avatar and hits "Save". Right again, if the user doesn't change the avatar (or any other field)
     //  and again hits "Save", the check "avatar.length > 0" still results in true and calls are made to the DB for the same file.
     // To prevent that for now, resetField is used. However, using "resetField" results in the field being set to undefined.

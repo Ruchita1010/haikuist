@@ -2,11 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signOutUser } from '@lib/supabase/api';
 import { useTheme } from '@context/ThemeContext';
+import { useSnackbar } from '@context/SnackbarContext';
 import Icon from '@components/Icon';
 
 export default function Settings() {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
+  const { enqueueSnackbar } = useSnackbar();
   const menuRef = useRef<HTMLDivElement>(null);
   const firstElementRef = useRef<HTMLAnchorElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,7 +16,7 @@ export default function Settings() {
   const handleSignOut = async () => {
     const { error } = await signOutUser();
     if (error) {
-      alert(error.message);
+      enqueueSnackbar('Error signing out');
       return;
     }
     navigate('/signin', { replace: true });

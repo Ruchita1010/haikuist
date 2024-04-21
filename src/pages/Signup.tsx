@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { supabase } from '@lib/supabase/supabaseClient';
 import { SignupSchema, signupSchema } from '@lib/validation';
+import { useSnackbar } from '@context/SnackbarContext';
 import FormError from '@/components/FormError';
 import Loader from '@components/Loader';
 
@@ -16,6 +17,7 @@ export default function Signup() {
     resolver: zodResolver(signupSchema),
   });
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const onSubmit = async (user: SignupSchema) => {
     const { error, data } = await supabase.auth.signUp({
@@ -29,12 +31,12 @@ export default function Signup() {
     });
 
     if (error) {
-      // set toast alert
-      alert(error.message);
+      enqueueSnackbar(`Error signing up`);
       return;
     }
     if (data) {
-      navigate('/home', { replace: true });
+      enqueueSnackbar('Please check your email for confirmation');
+      navigate('/', { replace: true });
       reset();
     }
   };
