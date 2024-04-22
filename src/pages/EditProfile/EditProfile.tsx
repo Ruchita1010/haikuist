@@ -15,7 +15,7 @@ import { useAuth } from '@context/AuthContext';
 import { useSnackbar } from '@context/SnackbarContext';
 import Icon from '@components/Icon';
 import Loader from '@components/Loader';
-import FormError from '@/components/FormError';
+import FormError from '@components/FormError';
 import AvatarUpload from './AvatarUpload';
 
 export default function EditProfile() {

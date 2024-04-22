@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { PostgrestError } from '@supabase/supabase-js';
-import { getAvatarUrl, getHaikuHues } from '@/lib/supabase/api';
+import { getAvatarUrl, getHaikuHues } from '@lib/supabase/api';
 import { HaikuHue } from '@/types';
-import { getCurrentMonthName } from '@/utils/dateFormatter';
+import { getCurrentMonthName } from '@utils/dateFormatter';
 import Loader from '@components/Loader';
 
 export default function HaikuHues() {

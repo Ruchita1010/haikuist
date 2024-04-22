@@ -4,7 +4,7 @@ import { HaikuSchema, haikuSchema } from '@lib/validation';
 import { createHaikuPosts } from '@lib/supabase/api';
 import { useAuth } from '@context/AuthContext';
 import { useSnackbar } from '@context/SnackbarContext';
-import FormError from '@/components/FormError';
+import FormError from '@components/FormError';
 
 export default function Create() {
   const {

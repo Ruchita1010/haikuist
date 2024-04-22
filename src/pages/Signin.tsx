@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { supabase } from '@lib/supabase/supabaseClient';
 import { SigninSchema, signinSchema } from '@lib/validation';
 import { useSnackbar } from '@context/SnackbarContext';
-import FormError from '@/components/FormError';
+import FormError from '@components/FormError';
 import Loader from '@components/Loader';
 
 export default function Signin() {

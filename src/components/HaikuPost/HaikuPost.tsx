@@ -1,7 +1,7 @@
 import { getAvatarUrl } from '@lib/supabase/api';
 import { HaikuPostType } from '@/types';
 import { useAuth } from '@context/AuthContext';
-import { formatRelativeTime } from '@/utils/dateFormatter';
+import { formatRelativeTime } from '@utils/dateFormatter';
 import HaikuPostActions from './HaikuPostActions';
 
 export default function HaikuPost({
