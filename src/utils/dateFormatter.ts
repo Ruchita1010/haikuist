@@ -4,7 +4,10 @@ export const getCurrentMonthName = () => {
 };
 
 export const formatMonthYear = (timestamp: string) => {
-  const date = new Date(timestamp);
+  const date = isNaN(new Date(timestamp).getTime())
+    ? new Date()
+    : new Date(timestamp);
+
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -12,7 +15,9 @@ export const formatMonthYear = (timestamp: string) => {
 };
 
 export const formatRelativeTime = (timestamp: string) => {
-  const date = new Date(timestamp);
+  const date = isNaN(new Date(timestamp).getTime())
+    ? new Date()
+    : new Date(timestamp);
   const diff = Date.now() - date.getTime();
 
   const seconds = Math.floor(diff / 1000);
