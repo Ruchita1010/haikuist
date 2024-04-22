@@ -11,6 +11,7 @@ import Profile from '@pages/Profile/Profile';
 import EditProfile from '@pages/EditProfile/EditProfile';
 import Notifications from '@pages/Notifications/Notifications';
 import Comments from '@pages/Comments';
+import NotFound from '@pages/NotFound';
 import './globals.css';
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
             <Route path="/edit-profile" element={<EditProfile />} />
             <Route path="/notifications" element={<Notifications />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </SnackbarProvider>
     </div>
