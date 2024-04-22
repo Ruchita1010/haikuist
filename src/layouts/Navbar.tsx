@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { supabase } from '@lib/supabase/supabaseClient';
 import { getNotificationCount } from '@lib/supabase/api';
 import { useAuth } from '@context/AuthContext';
+import { capitalizeFirstLetter } from '@utils/stringFormatter';
 import Icon from '@components/Icon';
 
 const navItems = ['home', 'notifications', 'create', 'profile'];
@@ -77,8 +78,8 @@ export default function Navbar() {
                   </span>
                 )}
               </div>
-              <span className="sr-only lg:not-sr-only lg:block first-letter:uppercase">
-                {navItem}
+              <span className="sr-only lg:not-sr-only lg:block">
+                {capitalizeFirstLetter(navItem)}
               </span>
             </NavLink>
           </div>
