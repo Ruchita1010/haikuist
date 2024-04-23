@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
@@ -10,6 +13,9 @@ export default {
         commentColor: 'hsl(var(--color-comment) / <alpha-value>)',
         saveColor: 'hsl(var(--color-save) / <alpha-value>)',
         errColor: 'hsl(var(--color-error) / <alpha-value>)',
+      },
+      fontFamily: {
+        sans: ["'Open Sans'", ...defaultTheme.fontFamily.sans],
       },
     },
   },
