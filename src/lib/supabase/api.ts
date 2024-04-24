@@ -142,6 +142,7 @@ export const getComments = (haikuId: string) => {
     .from('comments')
     .select('id, content, created_at, profile:profiles(username, avatar_path)')
     .eq('haiku_id', haikuId)
+    .order('created_at', { ascending: false })
     .returns<Comment[]>();
 };
 
