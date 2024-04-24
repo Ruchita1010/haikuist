@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { syllable } from 'syllable';
 
 export const signupSchema = z.object({
   email: z
@@ -37,8 +38,7 @@ const isValidLineCount = (value: string) => {
 };
 
 const isValidSyllableCount = (value: string) => {
-  const syllableCount = Math.floor(Math.random() * 20 + 3);
-  console.log(`todo: count syllables of ${value}`);
+  const syllableCount = syllable(value);
   return syllableCount > 3 && syllableCount < 18;
 };
 
