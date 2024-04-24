@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { PostgrestError } from '@supabase/supabase-js';
 import {
+  checkUsernameAvailability,
   getAvatarUrl,
   getUserById,
   updateProfile,
@@ -26,6 +27,7 @@ export default function EditProfile() {
   const {
     register,
     handleSubmit,
+    setError: setFormError,
     formState: { errors, isSubmitting },
     resetField,
     setValue,
@@ -71,12 +73,31 @@ export default function EditProfile() {
     );
   };
 
+  const checkUsername = async (username: string) => {
+    const { data, error } = await checkUsernameAvailability(username);
+    if (error) {
+      enqueueSnackbar(`Error saving username`);
+      return;
+    }
+    return data;
+  };
+
   const onSubmit = async (profileData: ProfileSchema) => {
     if (!isProfileModified(profileData) || !session?.user.id) {
       return;
     }
 
     const { username, bio, avatar } = profileData;
+
+    const usernameAvailable = await checkUsername(username);
+    if (!usernameAvailable) {
+      setFormError('username', {
+        type: 'custom',
+        message: 'Username already taken. Please choose another',
+      });
+      return;
+    }
+
     let updates: UserProfile = { username, bio };
 
     if (avatar && avatar.length > 0) {

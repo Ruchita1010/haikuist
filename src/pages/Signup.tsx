@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { supabase } from '@lib/supabase/supabaseClient';
 import { SignupSchema, signupSchema } from '@lib/validation';
+import { checkUsernameAvailability } from '@lib/supabase/api';
 import { useSnackbar } from '@context/SnackbarContext';
 import FormError from '@components/FormError';
 import Loader from '@components/Loader';
@@ -11,6 +12,7 @@ export default function Signup() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
     reset,
   } = useForm<SignupSchema>({
@@ -20,6 +22,21 @@ export default function Signup() {
   const { enqueueSnackbar } = useSnackbar();
 
   const onSubmit = async (user: SignupSchema) => {
+    const { data: usernameAvailable, error: usernameError } =
+      await checkUsernameAvailability(user.username);
+
+    if (usernameError) {
+      enqueueSnackbar(`Error signing up`);
+      return;
+    }
+    if (!usernameAvailable) {
+      setError('username', {
+        type: 'custom',
+        message: 'Username already taken. Please choose another',
+      });
+      return;
+    }
+
     const { error, data } = await supabase.auth.signUp({
       email: user.email,
       password: user.password,

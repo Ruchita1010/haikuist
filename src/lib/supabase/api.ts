@@ -174,3 +174,11 @@ export const getNotificationCount = (userId: string) => {
 export const getHaikuHues = () => {
   return supabase.rpc('get_haiku_hues').returns<HaikuHue[]>();
 };
+
+export const checkUsernameAvailability = (username_input: string) => {
+  return supabase
+    .rpc('check_username_availability', {
+      username_input,
+    })
+    .returns<boolean>();
+};
