@@ -1,15 +1,19 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '@context/AuthContext';
+import { useTheme } from '@context/ThemeContext';
+import sideImageDark from '@assets/images/side-img-dark.webp';
+import sideImageLight from '@assets/images/side-img-light.webp';
 
 export default function AuthLayout() {
   const { session } = useAuth();
+  const { theme } = useTheme();
   return (
     <>
       {session === null ? (
         <div className="flex">
           <div className="flex-1 hidden xl:block">
             <img
-              src="/assets/images/side-img.jpg"
+              src={theme === 'dark' ? sideImageDark : sideImageLight}
               alt=""
               className="w-full object-cover"
             />
