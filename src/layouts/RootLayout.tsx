@@ -1,5 +1,6 @@
 import { Link, Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '@context/AuthContext';
+import Logo from '@components/Logo';
 import HaikuHues from './HaikuHues';
 import Navbar from './Navbar';
 
@@ -11,9 +12,9 @@ export default function RootLayout() {
   ) : (
     <div className="max-w-[90rem] mx-auto flex flex-col-reverse md:flex-row transition-colors duration-300 ease-in-out">
       <header className="sticky bottom-0 md:top-0 md:h-screen lg:min-w-56 md:px-4 border-t md:border-t-0 md:border-r border-fgColor/15">
-        <div className="hidden md:block text-center my-4">
-          <Link to="/home">
-            <h1>Haikuist</h1>
+        <div className="hidden md:flex md:justify-center my-4">
+          <Link to="/home" aria-label="Haikuist">
+            <Logo />
           </Link>
         </div>
         <Navbar />
