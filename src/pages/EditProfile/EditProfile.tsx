@@ -90,13 +90,15 @@ export default function EditProfile() {
 
     const { username, bio, avatar } = profileData;
 
-    const usernameAvailable = await checkUsername(username);
-    if (!usernameAvailable) {
-      setFormError('username', {
-        type: 'custom',
-        message: 'Username already taken. Please choose another',
-      });
-      return;
+    if (currentProfile && username !== currentProfile.username) {
+      const usernameAvailable = await checkUsername(username);
+      if (!usernameAvailable) {
+        setFormError('username', {
+          type: 'custom',
+          message: 'Username already taken. Please choose another',
+        });
+        return;
+      }
     }
 
     let updates: UserProfile = { username, bio };
