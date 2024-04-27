@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { getAvatarUrl } from '@lib/supabase/api';
 import { AppNotification } from '@/types';
 import Icon from '@components/Icon';
+import defaultAvatar from '@assets/images/default-avatar.svg';
 
 type NotificationProps = Omit<AppNotification, 'id'>;
 
@@ -26,7 +27,7 @@ export default function Notification({
             src={
               avatar_path
                 ? getAvatarUrl(avatar_path).data.publicUrl
-                : '/assets/default-pfp.svg'
+                : defaultAvatar
             }
             alt={`${username}'s avatar`}
             className="flex-shrink-0 w-11 h-11 object-cover rounded-full"

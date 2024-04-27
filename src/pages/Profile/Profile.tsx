@@ -13,6 +13,7 @@ import { formatMonthYear } from '@utils/dateFormatter';
 import Loader from '@components/Loader';
 import Tab from '@components/Tab';
 import TabList from '@components/Tablist';
+import defaultAvatar from '@assets/images/default-avatar.svg';
 import Settings from './Settings';
 
 export default function Profile() {
@@ -38,7 +39,7 @@ export default function Profile() {
       const { avatar_path, ...userData } = data;
       const avatarUrl = avatar_path
         ? getAvatarUrl(avatar_path).data.publicUrl
-        : '/assets/default-pfp.svg';
+        : defaultAvatar;
       setUser({ ...userData, avatarUrl });
       setLoading(false);
     })();

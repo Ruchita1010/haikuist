@@ -17,6 +17,7 @@ import { useSnackbar } from '@context/SnackbarContext';
 import Icon from '@components/Icon';
 import Loader from '@components/Loader';
 import FormError from '@components/FormError';
+import defaultAvatar from '@assets/images/default-avatar.svg';
 import AvatarUpload from './AvatarUpload';
 
 export default function EditProfile() {
@@ -38,7 +39,7 @@ export default function EditProfile() {
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<PostgrestError | null>(null);
-  const [avatarUrl, setAvatarUrl] = useState('/assets/default-pfp.svg');
+  const [avatarUrl, setAvatarUrl] = useState(defaultAvatar);
   const [currentProfile, setCurrentProfile] = useState<UserProfile | null>(
     null
   );

@@ -6,6 +6,7 @@ import { Comment } from '@/types';
 import { formatRelativeTime } from '@utils/dateFormatter';
 import Icon from '@components/Icon';
 import Loader from '@components/Loader';
+import defaultAvatar from '@assets/images/default-avatar.svg';
 
 export default function Comments() {
   const { id } = useParams();
@@ -64,7 +65,7 @@ export default function Comments() {
                   src={
                     avatar_path
                       ? getAvatarUrl(avatar_path).data.publicUrl
-                      : '/assets/default-pfp.svg'
+                      : defaultAvatar
                   }
                   alt={`${username}'s avatar`}
                   className="flex-shrink-0 w-11 h-11 object-cover rounded-full"

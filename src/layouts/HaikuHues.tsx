@@ -4,6 +4,7 @@ import { getAvatarUrl, getHaikuHues } from '@lib/supabase/api';
 import { HaikuHue } from '@/types';
 import { getCurrentMonthName } from '@utils/dateFormatter';
 import Loader from '@components/Loader';
+import defaultAvatar from '@assets/images/default-avatar.svg';
 
 export default function HaikuHues() {
   const [loading, setLoading] = useState(true);
@@ -44,7 +45,7 @@ export default function HaikuHues() {
             const lines = content.split('\n');
             const avatarUrl = avatar_path
               ? getAvatarUrl(avatar_path).data.publicUrl
-              : '/assets/default-pfp.svg';
+              : defaultAvatar;
 
             return (
               <div key={id} className="p-2">

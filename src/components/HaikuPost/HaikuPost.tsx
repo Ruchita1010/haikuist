@@ -2,6 +2,7 @@ import { getAvatarUrl } from '@lib/supabase/api';
 import { HaikuPostType } from '@/types';
 import { useAuth } from '@context/AuthContext';
 import { formatRelativeTime } from '@utils/dateFormatter';
+import defaultAvatar from '@assets/images/default-avatar.svg';
 import HaikuPostActions from './HaikuPostActions';
 
 export default function HaikuPost({
@@ -14,7 +15,7 @@ export default function HaikuPost({
   const { username, avatar_path } = profile;
   const avatarUrl = avatar_path
     ? getAvatarUrl(avatar_path).data.publicUrl
-    : '/assets/default-pfp.svg';
+    : defaultAvatar;
   const lines = content.split('\n');
 
   return (
