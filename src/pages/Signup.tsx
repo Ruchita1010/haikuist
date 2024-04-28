@@ -124,19 +124,6 @@ export default function Signup() {
           </Link>
         </p>
       </div>
-
-      <div className="grid gap-4 mt-4">
-        <div className="flex items-center gap-2">
-          <div className="w-full border-t-2 border-fgColor/15"></div>
-          or
-          <div className="w-full border-t-2 border-fgColor/15"></div>
-        </div>
-        <button
-          type="button"
-          className="py-2 bg-fgColor/10 border border-fgColor/15 rounded-md hover:bg-fgColor/15">
-          Continue with Google
-        </button>
-      </div>
     </>
   );
 }
