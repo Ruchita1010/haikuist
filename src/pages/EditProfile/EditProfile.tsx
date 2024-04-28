@@ -56,7 +56,7 @@ export default function EditProfile() {
       const { username, bio, avatar_path } = data;
       setValue('username', username);
       setValue('bio', bio);
-      if (avatar_path !== '') {
+      if (avatar_path !== null) {
         const { publicUrl } = getAvatarUrl(avatar_path).data;
         setAvatarUrl(publicUrl);
       }
