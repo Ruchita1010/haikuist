@@ -26,7 +26,7 @@ export default function Signup() {
       await checkUsernameAvailability(user.username);
 
     if (usernameError) {
-      enqueueSnackbar(`Error signing up`);
+      enqueueSnackbar('Error signing up');
       return;
     }
     if (!usernameAvailable) {
@@ -48,7 +48,7 @@ export default function Signup() {
     });
 
     if (error) {
-      enqueueSnackbar(`Error signing up`);
+      enqueueSnackbar('Error signing up');
       return;
     }
     if (data) {
