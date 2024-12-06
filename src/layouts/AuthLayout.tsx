@@ -16,7 +16,7 @@ export default function AuthLayout() {
             <img
               src={theme === 'dark' ? sideImageDark : sideImageLight}
               alt=""
-              className="w-full min-h-screen object-cover"
+              className="w-full min-h-screen object-cover aspect-square"
             />
           </div>
           <section className="min-h-screen flex-1 flex flex-col px-6 py-4">
