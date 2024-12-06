@@ -7,6 +7,13 @@
     @apply box-border list-none p-0 m-0;
   }
 
+  /* easy-fix for now: always showing vertical scrollbar to avoid the horizontal layout shift 
+  (considered alternative solutions:- 'scrollbar-gutter' not supported widely and is pretty much same as showing a scrollbar 
+  or https://maxschmitt.me/posts/react-prevent-layout-shift-body-scrollable!) */
+  html {
+    overflow-y: scroll;
+  }
+
   a,
   input,
   button,
