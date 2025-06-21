@@ -34,7 +34,7 @@ export default function Navbar() {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     (async () => {

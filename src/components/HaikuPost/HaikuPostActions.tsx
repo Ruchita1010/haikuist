@@ -36,7 +36,7 @@ export default function HaikuPostActions({
         setHasSaved(true);
       }
     })();
-  }, []);
+  }, [haikuId, userId]);
 
   const handleLike = async (haikuId: string, userId: string) => {
     const { error } = await (hasLiked

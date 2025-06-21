@@ -30,7 +30,7 @@ export default function Notifications() {
         return;
       }
     })();
-  }, []);
+  }, [session?.user.id]);
 
   if (loading) {
     return <Loader />;

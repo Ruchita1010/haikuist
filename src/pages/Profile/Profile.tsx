@@ -43,7 +43,7 @@ export default function Profile() {
       setUser({ ...userData, avatarUrl });
       setLoading(false);
     })();
-  }, []);
+  }, [session?.user.id]);
 
   const tabs = [
     { id: 'haikus', path: '/profile', label: 'Haikus' },

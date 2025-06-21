@@ -63,7 +63,7 @@ export default function EditProfile() {
       setCurrentProfile({ username, bio, avatar_path });
       setLoading(false);
     })();
-  }, []);
+  }, [session?.user.id, setValue]);
 
   const isProfileModified = ({ username, bio, avatar }: ProfileSchema) => {
     return (
@@ -101,7 +101,7 @@ export default function EditProfile() {
       }
     }
 
-    let updates: UserProfile = { username, bio };
+    const updates: UserProfile = { username, bio };
 
     if (avatar && avatar.length > 0) {
       const avatarFile = avatar[0];

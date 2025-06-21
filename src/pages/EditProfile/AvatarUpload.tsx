@@ -37,7 +37,7 @@ export default function AvatarUpload({
         URL.revokeObjectURL(avatarSrc);
       }
     };
-  }, [selectedImage]);
+  }, [avatarSrc, selectedImage]);
 
   return (
     <div className="flex flex-col gap-3 mb-8 justify-center items-center">

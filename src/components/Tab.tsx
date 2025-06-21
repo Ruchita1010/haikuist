@@ -28,7 +28,7 @@ export default function Tab({ tabId, getData }: TabProps) {
       setHaikuPosts(data);
       setLoading(false);
     })();
-  }, []);
+  }, [getData, session?.user.id]);
 
   if (loading) {
     return (
