@@ -10,16 +10,14 @@ import defaultAvatar from '@assets/images/default-avatar.svg';
 
 export default function Comments() {
   const { id } = useParams();
-  if (!id) {
-    return;
-  }
-
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<PostgrestError | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
+    if (!id) return;
+
     (async () => {
       const { data, error } = await getComments(id);
       if (error) {
@@ -31,6 +29,10 @@ export default function Comments() {
       setLoading(false);
     })();
   }, []);
+
+  if (!id) {
+    return <p>Invalid or missing id</p>;
+  }
 
   if (loading) {
     return <Loader />;
