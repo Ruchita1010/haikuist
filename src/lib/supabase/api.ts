@@ -45,7 +45,7 @@ export const getHaikuPosts = () => {
       `id, content, created_at, profile:profiles(id, username, avatar_path)`
     )
     .order('created_at', { ascending: false })
-    .returns<HaikuPostType[]>();
+    .overrideTypes<HaikuPostType[]>();
 };
 
 export const likeHaikuPost = (haikuId: string, userId: string) => {
@@ -102,7 +102,7 @@ export const getUserHaikuPosts = (userId: string) => {
     )
     .eq('profile_id', userId)
     .order('created_at', { ascending: false })
-    .returns<HaikuPostType[]>();
+    .overrideTypes<HaikuPostType[]>();
 };
 
 export const getLikedHaikuPosts = (userId: string) => {
@@ -113,7 +113,7 @@ export const getLikedHaikuPosts = (userId: string) => {
     )
     .eq('profile_id', userId)
     .order('created_at', { ascending: false })
-    .returns<HaikuPostType[]>();
+    .overrideTypes<HaikuPostType[]>();
 };
 
 export const getSavedHaikuPosts = (userId: string) => {
@@ -124,7 +124,7 @@ export const getSavedHaikuPosts = (userId: string) => {
     )
     .eq('profile_id', userId)
     .order('created_at', { ascending: false })
-    .returns<HaikuPostType[]>();
+    .overrideTypes<HaikuPostType[]>();
 };
 
 export const addComment = (
@@ -143,7 +143,7 @@ export const getComments = (haikuId: string) => {
     .select('id, content, created_at, profile:profiles(username, avatar_path)')
     .eq('haiku_id', haikuId)
     .order('created_at', { ascending: false })
-    .returns<Comment[]>();
+    .overrideTypes<Comment[]>();
 };
 
 export const setNotificationsAsRead = (userId: string) => {
@@ -161,7 +161,7 @@ export const getNotifications = (userId: string) => {
     )
     .eq('recipient_profile_id', userId)
     .order('created_at', { ascending: false })
-    .returns<AppNotification[]>();
+    .overrideTypes<AppNotification[]>();
 };
 
 export const getNotificationCount = (userId: string) => {
@@ -173,7 +173,7 @@ export const getNotificationCount = (userId: string) => {
 };
 
 export const getHaikuHues = () => {
-  return supabase.rpc('get_haiku_hues').returns<HaikuHue[]>();
+  return supabase.rpc('get_haiku_hues').overrideTypes<HaikuHue[]>();
 };
 
 export const checkUsernameAvailability = (username_input: string) => {
@@ -181,5 +181,5 @@ export const checkUsernameAvailability = (username_input: string) => {
     .rpc('check_username_availability', {
       username_input,
     })
-    .returns<boolean>();
+    .overrideTypes<boolean>();
 };
