@@ -19,7 +19,12 @@ export default function HaikuHues() {
         setLoading(false);
         return;
       }
-      setHaikus(data);
+
+      // $FIX_ME: Type mismatch Error: Cannot cast single object to array type...
+      // Using Array.isArray check as a patch until RPC typing is properly resolved
+      if (Array.isArray(data)) {
+        setHaikus(data);
+      }
       setLoading(false);
     })();
   }, []);
