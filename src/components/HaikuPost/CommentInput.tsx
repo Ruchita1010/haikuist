@@ -26,9 +26,9 @@ export default function CommentInput({
   });
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    e.target.style.height = 'inherit';
-    e.target.style.height = `${Math.min(e.target.scrollHeight, 80)}px`;
+  const handleInput = (e: React.InputEvent<HTMLTextAreaElement>) => {
+    e.currentTarget.style.height = 'inherit';
+    e.currentTarget.style.height = `${Math.min(e.currentTarget.scrollHeight, 80)}px`;
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
