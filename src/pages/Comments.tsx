@@ -16,7 +16,10 @@ export default function Comments() {
   const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) {
+      setLoading(false);
+      return;
+    }
 
     (async () => {
       const { data, error } = await getComments(id);
@@ -28,7 +31,7 @@ export default function Comments() {
       setComments(data);
       setLoading(false);
     })();
-  }, []);
+  }, [id]);
 
   if (!id) {
     return <p>Invalid or missing id</p>;
@@ -92,7 +95,7 @@ export default function Comments() {
                 </div>
               </article>
             );
-          }
+          },
         )
       )}
     </>
