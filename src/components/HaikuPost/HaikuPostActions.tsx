@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { startTransition, useEffect, useOptimistic, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   checkIsLiked,
@@ -24,6 +24,9 @@ export default function HaikuPostActions({
   const [isSaved, setIsSaved] = useState(false);
   const [isCommentInputVisible, setIsCommentInputVisible] = useState(false);
 
+  const [optimisticIsLiked, setOptimisticIsLiked] = useOptimistic(isLiked);
+  const [optimisticIsSaved, setOptimisticIsSaved] = useOptimistic(isSaved);
+
   useEffect(() => {
     (async () => {
       const likeResult = await checkIsLiked(haikuId, userId);
@@ -38,22 +41,36 @@ export default function HaikuPostActions({
     })();
   }, [haikuId, userId]);
 
-  const handleLike = async (haikuId: string, userId: string) => {
-    const { error } = await (isLiked
-      ? unlikeHaikuPost(haikuId, userId)
-      : likeHaikuPost(haikuId, userId));
-    if (!error) {
-      setIsLiked(!isLiked);
-    }
+  const handleLike = (haikuId: string, userId: string) => {
+    startTransition(async () => {
+      setOptimisticIsLiked(!optimisticIsLiked);
+
+      const { error } = await (isLiked
+        ? unlikeHaikuPost(haikuId, userId)
+        : likeHaikuPost(haikuId, userId));
+
+      if (!error) {
+        startTransition(() => {
+          setIsLiked(!isLiked);
+        });
+      }
+    });
   };
 
-  const handleSave = async (haikuId: string, userId: string) => {
-    const { error } = await (isSaved
-      ? unsaveHaikuPost(haikuId, userId)
-      : saveHaikuPost(haikuId, userId));
-    if (!error) {
-      setIsSaved(!isSaved);
-    }
+  const handleSave = (haikuId: string, userId: string) => {
+    startTransition(async () => {
+      setOptimisticIsSaved(!optimisticIsSaved);
+
+      const { error } = await (isSaved
+        ? unsaveHaikuPost(haikuId, userId)
+        : saveHaikuPost(haikuId, userId));
+
+      if (!error) {
+        startTransition(() => {
+          setIsSaved(!isSaved);
+        });
+      }
+    });
   };
 
   return (
@@ -68,7 +85,7 @@ export default function HaikuPostActions({
             <Icon
               id="icon-like"
               className={`w-6 h-6 stroke-current ${
-                isLiked ? 'fill-current text-likeColor' : 'fill-none'
+                optimisticIsLiked ? 'fill-current text-likeColor' : 'fill-none'
               }`}
             />
           </button>
@@ -102,7 +119,7 @@ export default function HaikuPostActions({
           <Icon
             id="icon-save"
             className={`w-6 h-6 stroke-current ${
-              isSaved ? 'fill-current text-saveColor' : 'fill-none'
+              optimisticIsSaved ? 'fill-current text-saveColor' : 'fill-none'
             }`}
           />
         </button>
