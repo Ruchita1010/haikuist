@@ -20,39 +20,39 @@ export default function HaikuPostActions({
   haikuId,
   userId,
 }: HaikuPostActionsProp) {
-  const [hasLiked, setHasLiked] = useState(false);
-  const [hasSaved, setHasSaved] = useState(false);
-  const [commentInputVisible, setCommentInputVisible] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+  const [isCommentInputVisible, setIsCommentInputVisible] = useState(false);
 
   useEffect(() => {
     (async () => {
       const likeResult = await checkIsLiked(haikuId, userId);
       if (!likeResult.error && likeResult.data) {
-        setHasLiked(true);
+        setIsLiked(true);
       }
 
       const savedResult = await checkIsSaved(haikuId, userId);
       if (!savedResult.error && savedResult.data) {
-        setHasSaved(true);
+        setIsSaved(true);
       }
     })();
   }, [haikuId, userId]);
 
   const handleLike = async (haikuId: string, userId: string) => {
-    const { error } = await (hasLiked
+    const { error } = await (isLiked
       ? unlikeHaikuPost(haikuId, userId)
       : likeHaikuPost(haikuId, userId));
     if (!error) {
-      setHasLiked(!hasLiked);
+      setIsLiked(!isLiked);
     }
   };
 
   const handleSave = async (haikuId: string, userId: string) => {
-    const { error } = await (hasSaved
+    const { error } = await (isSaved
       ? unsaveHaikuPost(haikuId, userId)
       : saveHaikuPost(haikuId, userId));
     if (!error) {
-      setHasSaved(!hasSaved);
+      setIsSaved(!isSaved);
     }
   };
 
@@ -68,21 +68,21 @@ export default function HaikuPostActions({
             <Icon
               id="icon-like"
               className={`w-6 h-6 stroke-current ${
-                hasLiked ? 'fill-current text-likeColor' : 'fill-none'
+                isLiked ? 'fill-current text-likeColor' : 'fill-none'
               }`}
             />
           </button>
           <button
             type="button"
             aria-label="Comment"
-            aria-expanded={commentInputVisible}
+            aria-expanded={isCommentInputVisible}
             aria-controls={`commentInput_${haikuId}`}
             className="hover:scale-110"
-            onClick={() => setCommentInputVisible(!commentInputVisible)}>
+            onClick={() => setIsCommentInputVisible(!isCommentInputVisible)}>
             <Icon
               id="icon-comment"
               className={`w-6 h-6 stroke-current ${
-                commentInputVisible
+                isCommentInputVisible
                   ? 'fill-current text-commentColor'
                   : 'fill-none'
               }`}
@@ -102,16 +102,16 @@ export default function HaikuPostActions({
           <Icon
             id="icon-save"
             className={`w-6 h-6 stroke-current ${
-              hasSaved ? 'fill-current text-saveColor' : 'fill-none'
+              isSaved ? 'fill-current text-saveColor' : 'fill-none'
             }`}
           />
         </button>
       </div>
-      {commentInputVisible && (
+      {isCommentInputVisible && (
         <CommentInput
           haikuId={haikuId}
           userId={userId}
-          setCommentInputVisible={setCommentInputVisible}
+          setIsCommentInputVisible={setIsCommentInputVisible}
         />
       )}
     </>

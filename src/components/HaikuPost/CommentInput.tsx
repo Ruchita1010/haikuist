@@ -8,13 +8,13 @@ import FormError from '@components/FormError';
 type CommentInputProps = {
   haikuId: string;
   userId: string;
-  setCommentInputVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsCommentInputVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function CommentInput({
   haikuId,
   userId,
-  setCommentInputVisible,
+  setIsCommentInputVisible,
 }: CommentInputProps) {
   const {
     register,
@@ -33,7 +33,7 @@ export default function CommentInput({
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
     if (e.key === 'Escape') {
-      setCommentInputVisible(false);
+      setIsCommentInputVisible(false);
     }
   };
 
