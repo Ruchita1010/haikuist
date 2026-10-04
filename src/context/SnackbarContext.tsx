@@ -26,7 +26,7 @@ export const SnackbarProvider = ({
   const [currentMessage, setCurrentMessage] = useState('new message ');
   const [snackbarVisible, setSnackbarVisible] = useState(false);
 
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const enqueueSnackbar = (message: string) => {
     setQueue([...queue, message]);
