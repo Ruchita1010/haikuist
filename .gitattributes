@@ -1,0 +1,6 @@
+# Normalize text files to LF
+* text=auto
+
+# Scripts
+*.sh   text eol=lf
+*.bash text eol=lf
